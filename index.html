@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Consultancy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'orange': {
+                            'primary': '#fd9908',
+                            'dark': '#e55a2b',
+                            'light': '#ff8c5a',
+                        },
+                        'brown': {
+                            'primary': '#1a2437',
+                            'dark': '#654321',
+                            'light': '#a0522d',
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- X conversion tracking base code -->
+    <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    twq('config','r283s');
+    </script>
+    <!-- End X conversion tracking base code -->
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1526395831808737');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1526395831808737&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @keyframes rotateCW {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes rotateCCW {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+        
+        /* Clamp Font Sizes */
+        .text-clamp-xs { font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem); }
+        .text-clamp-sm { font-size: clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem); }
+        .text-clamp-base { font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem); }
+        .text-clamp-lg { font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem); }
+        .text-clamp-xl { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
+        .text-clamp-2xl { font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem); }
+        .text-clamp-3xl { font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem); }
+        .text-clamp-4xl { font-size: clamp(1.875rem, 1.5rem + 1.5vw, 3rem); }
+        .text-clamp-5xl { font-size: clamp(2.25rem, 1.75rem + 2vw, 3.75rem); }
+        .text-clamp-6xl { font-size: clamp(3rem, 2.5rem + 2.5vw, 4.5rem); }
+        .text-clamp-hero { font-size: clamp(2rem, 1.5rem + 3vw, 2rem); }
+
+        /* Reduce image height at 1366px to 50% of viewport height */
+        @media (width: 1366px) {
+            .top-section-images > div {
+                height: 50vh !important;
+                max-height: 50vh !important;
+            }
+        }
+        
+        @media (min-width: 1366px) and (max-width: 1367px) {
+            .top-section-images > div {
+                height: 40vh !important;
+                max-height: 40vh !important;
+            }
+            
+            /* Make top section fit viewport */
+            .top-section-container {
+                min-height: calc(100vh - 2rem);
+                max-height: calc(100vh - 2rem);
+                overflow: hidden;
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            
+            .top-section-container > div {
+                height: 100%;
+            }
+            
+            .top-section-container .grid {
+                height: 100%;
+                align-items: stretch;
+            }
+        }
+
+        /* Reduce font sizes at 1366px */
+        @media (min-width: 1366px) and (max-width: 1367px) {
+            .text-clamp-xs { font-size: clamp(0.5rem, 0.35rem + 0.3vw, 0.65rem); }
+            .text-clamp-sm { font-size: clamp(0.625rem, 0.45rem + 0.3vw, 0.75rem); }
+            .text-clamp-base { font-size: clamp(0.75rem, 0.55rem + 0.3vw, 0.85rem); }
+            .text-clamp-lg { font-size: clamp(0.875rem, 0.65rem + 0.3vw, 0.95rem); }
+            .text-clamp-xl { font-size: clamp(1rem, 0.75rem + 0.4vw, 1.2rem); }
+            .text-clamp-2xl { font-size: clamp(1.125rem, 0.85rem + 0.5vw, 1.5rem); }
+            .text-clamp-3xl { font-size: clamp(1.25rem, 1rem + 0.6vw, 1.75rem); }
+            .text-clamp-4xl { font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2.25rem); }
+            .text-clamp-5xl { font-size: clamp(1.875rem, 1.5rem + 1vw, 2.75rem); }
+            .text-clamp-6xl { font-size: clamp(2.25rem, 1.75rem + 1.2vw, 3.5rem); }
+            .text-clamp-hero { font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem); }
+            
+            /* Scale form to fit viewport without scroll */
+            #contactForm {
+                max-height: calc(100vh - 6rem);
+                overflow: hidden;
+                transform-origin: top center;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            #legalForm {
+                transform: scale(0.9);
+                transform-origin: top center;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem !important;
+            }
+            
+            /* Adjust form container spacing */
+            #contactForm h2 {
+                font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem) !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            #contactForm p {
+                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            #contactForm label {
+                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            #contactForm input,
+            #contactForm select,
+            #contactForm textarea {
+                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
+                padding: 0.5rem 0.75rem !important;
+            }
+            
+            #contactForm button {
+                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
+                padding: 0.5rem !important;
+            }
+            
+            /* Reduce spacing in form wrapper */
+            .top-section-container .space-y-6 > div:last-child {
+                max-height: calc(100vh - 8rem);
+                overflow: hidden;
+            }
+        }
+
+        /* Reduce font sizes at 1633px */
+        @media (min-width: 1650px) {
+            .text-clamp-xs { font-size: clamp(0.625rem, 0.4rem + 0.4vw, 0.7rem); }
+            .text-clamp-sm { font-size: clamp(0.75rem, 0.5rem + 0.4vw, 0.8rem); }
+            .text-clamp-base { font-size: clamp(0.875rem, 0.6rem + 0.4vw, 0.9rem); }
+            .text-clamp-lg { font-size: clamp(1rem, 0.7rem + 0.4vw, 1rem); }
+            .text-clamp-xl { font-size: clamp(1.125rem, 0.8rem + 0.5vw, 1.3rem); }
+            .text-clamp-2xl { font-size: clamp(1.25rem, 0.9rem + 0.7vw, 1.6rem); }
+            .text-clamp-3xl { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); }
+            .text-clamp-4xl { font-size: clamp(1.875rem, 1.2rem + 1.2vw, 2.5rem); }
+            .text-clamp-5xl { font-size: clamp(2.25rem, 1.5rem + 1.5vw, 3rem); }
+            .text-clamp-6xl { font-size: clamp(3rem, 2rem + 2vw, 4rem); }
+            .text-clamp-hero { font-size: clamp(1rem,  1vw, 2rem); }
+        }
+    </style>
+</head>
+<body class="font-inter antialiased bg-white dark:bg-black text-[#1a1a1a] dark:text-white transition-colors duration-300 scroll-smooth">
+    <!-- Preloader -->
+    <div id="preloader" style="position:fixed;inset:0;z-index:9999;display:flex;justify-content:center;align-items:center;background-color:#fff;" class="dark:!bg-black">
+        <div style="position:relative;width:256px;height:256px;display:flex;justify-content:center;align-items:center;">
+
+            <!-- Circle 1 -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCW 3s linear infinite;" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.3"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="80" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-dasharray="20 200" fill="none" opacity="0.8"/>
+            </svg>
+
+            <!-- Circle 2 -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCCW 4s linear infinite;" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
+                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.2"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="90" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="30 180" fill="none" opacity="0.6"/>
+            </svg>
+
+            <!-- Logo -->
+            <div style="position:relative;z-index:10;width:150px;height:150px;display:flex;justify-content:center;align-items:center;animation:pulse 2s ease-in-out infinite;">
+                <img src="./images/logo.webp" 
+                     alt="Logo" 
+                     style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 20px rgba(189,152,35,0.3));">
+            </div>
+
+            <!-- Glow effect -->
+            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle, #ceb361 0%, transparent 70%);animation:pulseGlow 2s ease-in-out infinite;"></div>
+
+        </div>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed top-6 right-6 z-50 w-12 h-12 rounded-full bg-white/90 dark:bg-[#1a1a1a]/90 backdrop-blur-sm flex items-center justify-center hover:bg-white dark:hover:bg-[#2a2a2a] hover:scale-110 transition-all duration-300 shadow-lg border border-[#e0e0e0] dark:border-[#333]">
+        <i class="fas fa-moon text-[#1a1a1a] dark:text-white" id="themeIcon"></i>
+    </button>
+
+    <!-- Top Section: Text Left + Form Right -->
+    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full top-section-container">
+        <div class="w-full px-6 lg:px-12 ">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-32 items-start">
+                <!-- Left: Main Heading and Introduction -->
+                <div class="space-y-6">
+                    <h1 class="text-clamp-xl 2xl:text-5xl    font-bold leading-tight text-brown-primary dark:text-white">
+                        Before you sign, ask one question:
+                        <span class="text-orange-primary">Can this decision be reversed under UAE law?</span>.
+                    </h1>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-1 h-16 bg-orange-primary mt-1"></div>
+                        <p class="text-clamp-base 2xl:text-2xl  text-[#555] dark:text-[#aaa] font-medium leading-relaxed">
+                            One wrong clause can stop everything. Decision review for sensitive agreements, high-stakes partnerships, and consequential commitments.
+                        </p>
+                    </div>
+                    
+                   
+                    
+                    <!-- Images -->
+                    <div class="  top-section-images">
+                        <div class="rounded-lg h-[200px] sm:h-[250px] lg:h-[300px] 2xl:h-[550px] overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                            <img src="./images/S4.webp" alt="Office meeting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                         
+                    </div>
+                    
+                 
+                </div>
+
+                <!-- Right: Form -->
+                <div class="space-y-6">
+                  <div  id="contactForm" class="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-xl p-5 lg:p-6 border-2 border-orange-primary/30 dark:border-orange-primary/20 hover:border-orange-primary/50 dark:hover:border-orange-primary/40 hover:shadow-xl transition-all duration-300">
+                    <h2 class="text-clamp-lg 2xl:text-5xl  font-bold text-[#1a1a1a] dark:text-white mb-3">
+                        Request a <span class="text-orange-primary">Confidential Review</span>
+                    </h2>
+                    <p class="text-[9px] 2xl:text-2xl  text-[#666] dark:text-[#aaa] mb-3">
+                        For serious files only. If your decision is significant, submit the details below.
+                    </p>
+                    
+                    <form id="legalForm" class="space-y-3 2xl:space-y-12">
+                        <div>
+                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                Name <span class="text-orange-primary">*</span>
+                            </label>
+                            <input type="text" placeholder="Enter your full name" required class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs 2xl:text-xl  text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                        </div>
+
+                        <div>
+                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                What type of legal decision are you about to finalize? <span class="text-orange-primary">*</span>
+                            </label>
+                            <div class="relative">
+                                <select required class="w-full 2xl:text-lg  px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer">
+                                    <option value="">Select decision type</option>
+                                    <option value="dispute">Company formation / restructuring</option>
+                                    <option value="contract">Shareholder or partner agreement</option>
+                                    <option value="partnership">Golden Visa / residency matter</option>
+                                    <option value="investment">High-value contract or obligation</option>
+                                    <option value="investment">Regulatory or compliance exposure</option>
+                                    <option value="investment">Other high-impact legal matter</option>
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                Case Details <span class="text-[#999] dark:text-[#666] text-[8px] 2xl:text-md">(Optional)</span>
+                            </label>
+                            <textarea placeholder="Provide additional details about your case..." rows="2" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] 2xl:text-lg border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666] resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                How would you like to be contacted for this confidential review? <span class="text-orange-primary">*</span>
+                            </label>
+                            <div class="relative">
+                                <select id="contactChannel" required class="w-full px-2.5  2xl:text-lg py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer">
+                                    <option value="">Select contact channel</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="phone">Phone Call</option>
+                                    <option value="email">Email</option>
+                                </select>
+                                <i class="fas fa-chevron-down absolute right-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number Field (shown when WhatsApp is selected) -->
+                        <div id="phoneField" class="hidden">
+                            <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                Phone Number <span class="text-orange-primary">*</span>
+                            </label>
+                            <input type="tel" id="phoneInput" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                        </div>
+
+                        <!-- Email Field (shown when Email is selected) -->
+                        <div id="emailField" class="hidden">
+                            <label class="block text-[9px] 2xl:text-xl font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                Email Address <span class="text-orange-primary">*</span>
+                            </label>
+                            <input type="email" id="emailInput" placeholder="your.email@example.com" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                        </div>
+
+                        <button type="submit" class="w-full 2l:text-xl py-2 bg-orange-primary text-white rounded-lg font-bold text-xs hover:bg-orange-dark hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-wider">
+                            Request Expert Consultation
+                        </button>
+                    </form>
+                  </div>
+                     <!-- Tags -->
+                     <div class="flex flex-wrap items-center justify-center gap-3">
+                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">Signing is close</span>
+                        </div>
+                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">Material value</span>
+                        </div>
+                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">Reputation at risk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section: Three Cards -->
+    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+        <div class="w-full px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Expert Consultation -->
+                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                        <img src="./images/S5.webp" alt="Expert Consultation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">Expert Consultation</h3>
+                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">Direct access to senior legal counsel</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Document Review -->
+                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                        <img src="./images/S7.webp" alt="Document Review" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">Document Review</h3>
+                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">Thorough analysis of every clause</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Strategic Planning -->
+                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                        <img src="./images/S6.webp" alt="Strategic Planning" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">Strategic Planning</h3>
+                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">Mapping outcomes before commitment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lower Section: Text Left + Image Right -->
+    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+        <div class="w-full px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                <!-- Left: Content Text -->
+                <div class="space-y-8">
+                    <h2 class="text-clamp-2xl font-bold leading-tight text-brown-primary dark:text-white">
+                        Most legal problems <span class="text-orange-primary">begin</span> before court — at the decision.
+                    </h2>
+                    
+                    <p class="text-clamp-base text-[#666] dark:text-[#999] leading-relaxed">
+                        Legal problems don't start in litigation. They start at commitment. The moment a signature is placed, a partnership is formed, or a consultation is delayed, risk takes shape.
+                    </p>
+                    
+                    <!-- Decision Points Cards -->
+                    <div class="grid grid-cols-3 gap-4 my-8">
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-pen-fancy text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">A signature.</p>
+                        </div>
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-users text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">A partnership.</p>
+                        </div>
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-comments text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">A consultation.</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-clamp-xs text-[#999] dark:text-[#666] uppercase tracking-wider mb-4 inline-block px-4 py-2 rounded-lg border-2 border-transparent hover:border-orange-primary transition-all duration-300 cursor-pointer">
+                        Each decision point carries potential consequences:
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">Disputes</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">Travel restrictions</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">Asset freezes</span>
+                        </div>
+                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">Commercial litigation</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#f5f5f5] dark:bg-[#1a1a1a] rounded-lg p-6 border-l-4 border-orange-primary mt-8 hover:border-orange-dark hover:shadow-lg hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer">
+                        <p class="text-clamp-base text-[#1a1a1a] dark:text-white leading-relaxed">
+                            "Prevention over disputes. Clarity over optimism. Responsibility over guesswork. If your decision carries material weight, it deserves measured review before you commit."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Strategic Protection Image + Built for Card -->
+                <div class="space-y-6">
+                    <!-- Strategic Protection Card -->
+                    <div class="relative rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] group hover:border-orange-primary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                        <div class="h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[500px] overflow-hidden">
+                            <img src="./images/S3.webp" alt="Strategic Protection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-12 h-12 bg-orange-primary rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-clock text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-clamp-xl font-bold text-white">Strategic Protection</h3>
+                            </div>
+                            <p class="text-clamp-sm text-white/90">
+                                Comprehensive risk assessment for high-stakes decisions. We protect your interests before they are threatened.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Built for Card -->
+                    <div class="bg-white dark:bg-[#0a0a0a] rounded-xl p-8 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <h3 class="text-clamp-sm font-bold text-orange-primary mb-6 uppercase tracking-wider">
+                            Built for consequential decisions
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                <span>High-value contracts</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                <span>Partnership structuring</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                <span>Pre-dispute risk review</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                <span>Reputation matters</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- VIP Legal Protection Program Section -->
+    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+        <div class="w-full px-6 lg:px-12  ">
+            <div class="bg-gradient-to-br from-[#1e293b] to-[#0f172a] dark:from-[#0a0a0a] dark:to-[#000] rounded-3xl p-6 lg:p-8 overflow-hidden border border-[#334155] dark:border-[#1a1a1a] shadow-2xl hover:shadow-orange-primary/20 transition-all duration-300">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <!-- Left Section: Program Details -->
+                    <div class="space-y-4">
+                        <!-- Executive Access Tag -->
+                        <div class="inline-flex items-center gap-2 bg-orange-primary/20 border-2 border-orange-primary rounded-full px-3 py-1.5 hover:bg-orange-primary/30 transition-all duration-300 cursor-pointer group">
+                            <i class="fas fa-check-circle text-orange-primary text-sm group-hover:scale-110 transition-transform duration-300"></i>
+                            <span class="text-white text-[9px] uppercase tracking-wider">Executive Access</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h2 class="text-clamp-xl font-bold text-white leading-tight">
+                            VIP Legal <span class="text-orange-primary">Protection Program</span>
+                        </h2>
+
+                        <!-- Description -->
+                        <p class="text-clamp-sm text-white/80 leading-relaxed">
+                            For executives and decision-makers who require the highest level of legal counsel and strategic protection.
+                        </p>
+
+                        <!-- Program Benefits -->
+                        <div class="space-y-3">
+                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                    <div>
+                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">Priority Response</h3>
+                                        <p class="text-xs text-white/70">24-hour dedicated review for urgent matters</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                    <div>
+                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">Senior Counsel Direct Access</h3>
+                                        <p class="text-xs text-white/70">Direct line to our most experienced advisors</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                    <div>
+                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">Comprehensive Risk Mapping</h3>
+                                        <p class="text-xs text-white/70">Full scenario analysis for every decision</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                    </div>
+
+                    <!-- Right Section: Image with Statistics -->
+                    <div class="relative rounded-2xl overflow-hidden group">
+                        <div class="h-[400px] lg:h-[450px] overflow-hidden">
+                            <img src="./images/S8.webp" alt="VIP Protection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        
+                        <!-- Statistics Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">$2B+</div>
+                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">Protected</p>
+                                </div>
+                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">50+</div>
+                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">VIP Clients</p>
+                                </div>
+                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                    <div class="text-clamp-2xl font-bold text-orange-primary mb-0.5">100%</div>
+                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">Confidential</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Disclaimer -->
+                <div class="text-center mt-6 pt-4 border-t border-[#334155] dark:border-[#1a1a1a]">
+                    <p class="text-[9px] text-white/50 uppercase tracking-widest">
+                        By Invitation or Qualification Only • Limited Availability
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gradient-to-r from-orange-primary/10 via-orange-primary/5 to-orange-primary/10 dark:from-orange-primary/20 dark:via-orange-primary/10 dark:to-orange-primary/20 border-t border-orange-primary/30 dark:border-orange-primary/20 w-full">
+        <div class="w-full px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider">
+                    © 2024 Legal Consultancy FZC LLC
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">Privacy Policy</a>
+                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Theme Toggle - Set before page loads
+        const html = document.documentElement;
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const preloader = document.getElementById('preloader');
+        
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+            if (preloader) {
+                preloader.style.backgroundColor = '#000';
+            }
+        } else {
+            html.classList.remove('dark');
+            if (preloader) {
+                preloader.style.backgroundColor = '#fff';
+            }
+        }
+
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (preloader) {
+                    preloader.style.transition = 'opacity 0.6s ease-in-out';
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                        
+                        // Scroll to form on mobile devices
+                        const isMobile = window.innerWidth < 1024; // lg breakpoint
+                        if (isMobile) {
+                            const formElement = document.getElementById('contactForm');
+                            if (formElement) {
+                                setTimeout(() => {
+                                    formElement.scrollIntoView({ 
+                                        behavior: 'smooth', 
+                                        block: 'start' 
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }, 600);
+                }
+            }, 500);
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        if (currentTheme === 'dark') {
+            themeIcon.className = 'fas fa-sun text-white';
+        } else {
+            themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            
+            if (isDark) {
+                themeIcon.className = 'fas fa-sun text-white';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Contact Channel Toggle
+        const contactChannel = document.getElementById('contactChannel');
+        const phoneField = document.getElementById('phoneField');
+        const emailField = document.getElementById('emailField');
+        const phoneInput = document.getElementById('phoneInput');
+        const emailInput = document.getElementById('emailInput');
+
+        contactChannel.addEventListener('change', function() {
+            const selectedValue = this.value;
+            
+            // Hide both fields first
+            phoneField.classList.add('hidden');
+            emailField.classList.add('hidden');
+            phoneInput.removeAttribute('required');
+            emailInput.removeAttribute('required');
+            phoneInput.value = '';
+            emailInput.value = '';
+            
+            // Show appropriate field based on selection
+            if (selectedValue === 'whatsapp' || selectedValue === 'phone') {
+                phoneField.classList.remove('hidden');
+                phoneInput.setAttribute('required', 'required');
+            } else if (selectedValue === 'email') {
+                emailField.classList.remove('hidden');
+                emailInput.setAttribute('required', 'required');
+            }
+        });
+
+        // Form submission
+        document.getElementById('legalForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            const originalBg = btn.style.background;
+            
+            // Disable button and show processing state
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            btn.style.background = '#48bb78';
+            
+            // Collect form data
+            const formData = {
+                name: this.querySelector('input[type="text"]').value,
+                decisionType: this.querySelector('select').value,
+                caseDetails: this.querySelector('textarea').value || '',
+                contactChannel: document.getElementById('contactChannel').value,
+                phoneNumber: document.getElementById('phoneInput')?.value || '',
+                email: document.getElementById('emailInput')?.value || ''
+            };
+            
+            try {
+                // Send data to webhook
+                const response = await fetch('https://shazmlc.cloud/webhook/website-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    // Success
+                    btn.textContent = '✓ Submitted Successfully';
+                    btn.style.background = '#28a745';
+                    
+                    // Twitter conversion tracking event
+                    twq('event', 'Lead');
+                    
+                    // Reset form after 2 seconds
+                    setTimeout(() => {
+                        this.reset();
+                        // Hide phone/email fields
+                        phoneField.classList.add('hidden');
+                        emailField.classList.add('hidden');
+                        phoneInput.removeAttribute('required');
+                        emailInput.removeAttribute('required');
+                        
+                        btn.textContent = originalText;
+                        btn.style.background = originalBg;
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    // Error response
+                    throw new Error('Failed to submit form');
+                }
+            } catch (error) {
+                // Handle error
+                console.error('Error submitting form:', error);
+                btn.textContent = '✗ Error - Try Again';
+                btn.style.background = '#dc3545';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = originalBg;
+                    btn.disabled = false;
+                }, 3000);
+            }
+        });
+
+        // Testimonials Slider
+        const testimonialsData = [
+            {
+                quote: "The level of detail and foresight in their review saved us from a potentially catastrophic partnership agreement. They identified clauses that would have cost us millions.",
+                name: "Ahmed Al-Mansouri",
+                title: "CEO, Emirates Tech Holdings",
+                initials: "AM"
+            },
+            {
+                quote: "Their scenario planning approach is unmatched. They mapped out every possible outcome before we signed, giving us the confidence to proceed with clarity.",
+                name: "Sarah Johnson",
+                title: "General Counsel, Global Ventures",
+                initials: "SJ"
+            },
+            {
+                quote: "Professional, thorough, and strategic. They don't just review documents—they protect your interests with precision and expertise.",
+                name: "Mohammed Al-Hashimi",
+                title: "Managing Partner, Horizon Capital",
+                initials: "MH"
+            }
+        ];
+
+        let currentSlide = 0;
+
+        function renderTestimonials() {
+            const container = document.getElementById('testimonialsContainer');
+            const dotsContainer = document.getElementById('dotsContainer');
+            
+            // Check if elements exist before manipulating them
+            if (!container || !dotsContainer) {
+                return;
+            }
+            
+            container.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            
+            testimonialsData.forEach((testimonial, index) => {
+                // Testimonial card
+                const card = document.createElement('div');
+                card.className = 'min-w-full md:min-w-[calc(33.333%-1rem)] px-4';
+                card.innerHTML = `
+                    <div class="bg-white dark:bg-[#0a0a0a] rounded-2xl p-10 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-2xl transition-all duration-300 h-full group">
+                        <div class="flex gap-1 mb-6">
+                            ${Array(5).fill(0).map(() => '<i class="fas fa-star text-orange-primary text-lg"></i>').join('')}
+                        </div>
+                        <p class="text-clamp-lg text-[#333] dark:text-[#ccc] mb-8 leading-relaxed italic min-h-[120px]">
+                            "${testimonial.quote}"
+                        </p>
+                        <div class="flex items-center gap-4 pt-4 border-t border-[#e0e0e0] dark:border-[#333]">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-primary/20 to-orange-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-orange-primary font-bold text-clamp-base">${testimonial.initials}</span>
+                            </div>
+                            <div>
+                                <p class="text-clamp-base font-bold text-brown-primary dark:text-white mb-1">${testimonial.name}</p>
+                                <p class="text-clamp-sm text-[#666] dark:text-[#999]">${testimonial.title}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+
+                // Dot indicator
+                const dot = document.createElement('button');
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-orange-primary w-8' : 'bg-[#e0e0e0] dark:bg-[#333] hover:bg-orange-primary/50'}`;
+                dot.onclick = () => goToSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const container = document.getElementById('testimonialsContainer');
+            if (!container) return;
+            const isMobile = window.innerWidth < 768;
+            const slideWidth = isMobile ? 100 : 33.333;
+            container.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+        }
+
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(index, testimonialsData.length - 1));
+            renderTestimonials();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % testimonialsData.length;
+            renderTestimonials();
+        }
+
+        // Auto-slide - Continuous movement
+        let autoSlideInterval;
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 3000); // Move every 3 seconds
+        }
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            const container = document.getElementById('testimonialsContainer');
+            const slider = document.getElementById('testimonialsSlider');
+            
+            // Only initialize if testimonials section exists
+            if (container && slider) {
+                renderTestimonials();
+                startAutoSlide();
+                
+                // Pause on hover (optional - can be removed if you want continuous movement)
+                slider.addEventListener('mouseenter', stopAutoSlide);
+                slider.addEventListener('mouseleave', startAutoSlide);
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('testimonialsContainer');
+            if (container) {
+                updateSlider();
+            }
+        });
+    </script>
+</body>
+</html>

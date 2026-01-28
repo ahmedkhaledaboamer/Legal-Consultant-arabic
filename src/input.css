@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom animations */
+@keyframes rotateCW {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateCCW {
+    0% { transform: rotate(-360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* Clamp Font Sizes - These will be handled by Tailwind config */
+/* But keeping for backward compatibility */
+.text-clamp-xs { font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem); }
+.text-clamp-sm { font-size: clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem); }
+.text-clamp-base { font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem); }
+.text-clamp-lg { font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem); }
+.text-clamp-xl { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
+.text-clamp-2xl { font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem); }
+.text-clamp-3xl { font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem); }
+.text-clamp-4xl { font-size: clamp(1.875rem, 1.5rem + 1.5vw, 3rem); }
+.text-clamp-5xl { font-size: clamp(2.25rem, 1.75rem + 2vw, 3.75rem); }
+.text-clamp-6xl { font-size: clamp(3rem, 2.5rem + 2.5vw, 4.5rem); }
+.text-clamp-hero { font-size: clamp(2rem, 1.5rem + 3vw, 2rem); }
+
+/* Reduce image height at 1366px to 50% of viewport height */
+@media (width: 1366px) {
+    .top-section-images > div {
+        height: 50vh !important;
+        max-height: 50vh !important;
+    }
+}
+
+@media (min-width: 1366px) and (max-width: 1367px) {
+    .top-section-images > div {
+        height: 50vh !important;
+        max-height: 50vh !important;
+    }
+}
+
+/* Reduce font sizes at 1633px */
+@media (min-width: 1650px) {
+    .text-clamp-xs { font-size: clamp(0.625rem, 0.4rem + 0.4vw, 0.7rem); }
+    .text-clamp-sm { font-size: clamp(0.75rem, 0.5rem + 0.4vw, 0.8rem); }
+    .text-clamp-base { font-size: clamp(0.875rem, 0.6rem + 0.4vw, 0.9rem); }
+    .text-clamp-lg { font-size: clamp(1rem, 0.7rem + 0.4vw, 1rem); }
+    .text-clamp-xl { font-size: clamp(1.125rem, 0.8rem + 0.5vw, 1.3rem); }
+    .text-clamp-2xl { font-size: clamp(1.25rem, 0.9rem + 0.7vw, 1.6rem); }
+    .text-clamp-3xl { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); }
+    .text-clamp-4xl { font-size: clamp(1.875rem, 1.2rem + 1.2vw, 2.5rem); }
+    .text-clamp-5xl { font-size: clamp(2.25rem, 1.5rem + 1.5vw, 3rem); }
+    .text-clamp-6xl { font-size: clamp(3rem, 2rem + 2vw, 4rem); }
+    .text-clamp-hero { font-size: clamp(1rem,  1vw, 2rem); }
+}
+
+/* Custom animations and utilities */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Smooth transitions for theme switching */
+body,
+body * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fafafa;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dbeafe;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bfdbfe;
+}
+
+/* Selection color */
+::selection {
+    background-color: rgba(255, 107, 53, 0.3);
+    color: #1a1a1a;
+}
+
+.dark ::selection {
+    background-color: rgba(255, 107, 53, 0.3);
+    color: white;
+}
+
+/* Focus styles */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Hover effects for cards */
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
