@@ -14,14 +14,14 @@ if (consultationForm) {
         
         // Validate form
         if (!formData.decisionType || !formData.signingImminent || !formData.phoneNumber || !formData.contactChannel) {
-            showMessage('Please fill in all required fields', 'error');
+            showMessage('الرجاء ملء جميع الحقول المطلوبة', 'error');
             return;
         }
         
         // Validate phone number format (basic validation)
         const phoneRegex = /^\+?[0-9\s-]+$/;
         if (!phoneRegex.test(formData.phoneNumber)) {
-            showMessage('Please enter a valid phone number', 'error');
+            showMessage('الرجاء إدخال رقم هاتف صحيح', 'error');
             return;
         }
         
@@ -33,7 +33,7 @@ if (consultationForm) {
         const submitBtn = document.querySelector('.submit-btn');
         if (submitBtn) {
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Submitted Successfully ✓';
+            submitBtn.textContent = 'تم الإرسال بنجاح ✓';
             submitBtn.style.backgroundColor = '#28a745';
             submitBtn.disabled = true;
             
@@ -47,7 +47,7 @@ if (consultationForm) {
         }
         
         // Show success notification
-        showMessage('Your request has been submitted successfully. We will contact you soon.', 'success');
+        showMessage('تم استلام طلبك بنجاح. سنتواصل معك قريباً.', 'success');
     });
 }
 
