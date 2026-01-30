@@ -1,27 +1,73 @@
+// Handle contact channel change to show/hide relevant fields
+const contactChannelSelect = document.getElementById('contactChannel');
+if (contactChannelSelect) {
+    contactChannelSelect.addEventListener('change', function() {
+        // Hide all fields
+        document.getElementById('whatsappField').classList.add('hidden');
+        document.getElementById('phoneField').classList.add('hidden');
+        document.getElementById('emailField').classList.add('hidden');
+        
+        // Show selected field
+        if (this.value === 'whatsapp') {
+            document.getElementById('whatsappField').classList.remove('hidden');
+        } else if (this.value === 'phone') {
+            document.getElementById('phoneField').classList.remove('hidden');
+        } else if (this.value === 'email') {
+            document.getElementById('emailField').classList.remove('hidden');
+        }
+    });
+}
+
 // Form submission handler - Only run if form exists
-const consultationForm = document.getElementById('consultationForm');
-if (consultationForm) {
-    consultationForm.addEventListener('submit', function(e) {
+const legalForm = document.getElementById('legalForm');
+if (legalForm) {
+    legalForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const contactChannel = document.getElementById('contactChannel')?.value;
         
         // Get form data
         const formData = {
             decisionType: document.getElementById('decisionType')?.value,
-            signingImminent: document.querySelector('input[name="signingImminent"]:checked')?.value,
-            phoneNumber: document.getElementById('phoneNumber')?.value,
-            contactChannel: document.getElementById('contactChannel')?.value
+            contactChannel: contactChannel,
+            language: document.getElementById('language')?.value,
+            whatsupnumber: null,
+            phoneNumber: null,
+            email: null
         };
         
+        // Get the appropriate contact field based on channel
+        if (contactChannel === 'whatsapp') {
+            formData.whatsupnumber = document.getElementById('whatsupnumber')?.value;
+        } else if (contactChannel === 'phone') {
+            formData.phoneNumber = document.getElementById('phoneInput')?.value;
+        } else if (contactChannel === 'email') {
+            formData.email = document.getElementById('emailInput')?.value;
+        }
+        
         // Validate form
-        if (!formData.decisionType || !formData.signingImminent || !formData.phoneNumber || !formData.contactChannel) {
+        if (!formData.decisionType || !formData.contactChannel) {
             showMessage('الرجاء ملء جميع الحقول المطلوبة', 'error');
             return;
         }
         
-        // Validate phone number format (basic validation)
+        // Validate contact information based on channel
+        if (contactChannel === 'whatsapp' && !formData.whatsupnumber) {
+            showMessage('الرجاء إدخال رقم واتس اب', 'error');
+            return;
+        } else if (contactChannel === 'phone' && !formData.phoneNumber) {
+            showMessage('الرجاء إدخال رقم الهاتف', 'error');
+            return;
+        } else if (contactChannel === 'email' && !formData.email) {
+            showMessage('الرجاء إدخال البريد الإلكتروني', 'error');
+            return;
+        }
+        
+        // Validate phone/whatsapp format (basic validation)
         const phoneRegex = /^\+?[0-9\s-]+$/;
-        if (!phoneRegex.test(formData.phoneNumber)) {
-            showMessage('الرجاء إدخال رقم هاتف صحيح', 'error');
+        if ((contactChannel === 'whatsapp' && !phoneRegex.test(formData.whatsupnumber)) ||
+            (contactChannel === 'phone' && !phoneRegex.test(formData.phoneNumber))) {
+            showMessage('الرجاء إدخال رقم صحيح', 'error');
             return;
         }
         

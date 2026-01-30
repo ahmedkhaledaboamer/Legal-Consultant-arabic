@@ -344,7 +344,15 @@
                             </div>
                         </div>
 
-                        <!-- Phone Number Field (shown when WhatsApp is selected) -->
+                        <!-- WhatsApp Number Field (shown when WhatsApp is selected) -->
+                        <div id="whatsappField" class="hidden">
+                            <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                رقم واتس اب <span class="text-orange-primary">*</span>
+                            </label>
+                            <input type="tel" id="whatsupnumber" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                        </div>
+
+                        <!-- Phone Number Field (shown when Phone is selected) -->
                         <div id="phoneField" class="hidden">
                             <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
                                 رقم الهاتف <span class="text-orange-primary">*</span>
@@ -359,6 +367,9 @@
                             </label>
                             <input type="email" id="emailInput" placeholder="your.email@example.com" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
                         </div>
+
+                        <!-- Language Field (hidden, always sent with value 'english') -->
+                        <input type="hidden" id="language" value="english">
 
                         <button type="submit" class="w-full 2l:text-xl py-2 bg-orange-primary text-white rounded-lg font-bold text-xs hover:bg-orange-dark hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-wider">
                             اطلب استشارة خبير
