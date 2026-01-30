@@ -350,6 +350,7 @@
                                 رقم واتس اب <span class="text-orange-primary">*</span>
                             </label>
                             <input type="tel" id="whatsupnumber" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                            <p id="whatsappError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
                         </div>
 
                         <!-- Phone Number Field (shown when Phone is selected) -->
@@ -358,6 +359,7 @@
                                 رقم الهاتف <span class="text-orange-primary">*</span>
                             </label>
                             <input type="tel" id="phoneInput" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                            <p id="phoneError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
                         </div>
 
                         <!-- Email Field (shown when Email is selected) -->
@@ -366,10 +368,11 @@
                                 عنوان البريد الإلكتروني <span class="text-orange-primary">*</span>
                             </label>
                             <input type="email" id="emailInput" placeholder="your.email@example.com" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                            <p id="emailError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
                         </div>
 
-                        <!-- Language Field (hidden, always sent with value 'english') -->
-                        <input type="hidden" id="language" value="english">
+                        <!-- Language Field (hidden, always sent with value 'arabic') -->
+                        <input type="hidden" id="language" value="arabic">
 
                         <button type="submit" class="w-full 2l:text-xl py-2 bg-orange-primary text-white rounded-lg font-bold text-xs hover:bg-orange-dark hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-wider">
                             اطلب استشارة خبير
@@ -722,24 +725,252 @@
 
         // Contact Channel Toggle
         const contactChannel = document.getElementById('contactChannel');
+        const whatsappField = document.getElementById('whatsappField');
         const phoneField = document.getElementById('phoneField');
         const emailField = document.getElementById('emailField');
+        const whatsappInput = document.getElementById('whatsupnumber');
         const phoneInput = document.getElementById('phoneInput');
         const emailInput = document.getElementById('emailInput');
+        const whatsappError = document.getElementById('whatsappError');
+        const phoneError = document.getElementById('phoneError');
+        const emailError = document.getElementById('emailError');
+
+        // Validation functions
+        function validatePhone(phone) {
+            // Remove all non-digit characters except +
+            const cleanPhone = phone.replace(/[^\d+]/g, '');
+            // Check if it starts with + and has at least 10 digits, or has at least 9 digits without +
+            if (cleanPhone.startsWith('+')) {
+                const digits = cleanPhone.slice(1);
+                return digits.length >= 9 && digits.length <= 15;
+            } else {
+                return cleanPhone.length >= 9 && cleanPhone.length <= 15;
+            }
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showError(errorElement, message) {
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        function hideError(errorElement) {
+            errorElement.classList.add('hidden');
+            errorElement.textContent = '';
+        }
+
+        // WhatsApp validation - Only allow numbers and + at start
+        whatsappInput.addEventListener('keydown', function(e) {
+            const key = e.key;
+            const keyCode = e.keyCode || e.which;
+            
+            // Allow: backspace, delete, tab, escape, enter, arrow keys
+            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
+                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                (keyCode === 65 && e.ctrlKey) ||
+                (keyCode === 67 && e.ctrlKey) ||
+                (keyCode === 86 && e.ctrlKey) ||
+                (keyCode === 88 && e.ctrlKey)) {
+                return;
+            }
+            
+            // Allow numbers (0-9) from main keyboard or numpad
+            if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
+                return;
+            }
+            
+            // Allow + only at the start
+            if (key === '+' && this.value.length === 0) {
+                return;
+            }
+            
+            // Block everything else
+            e.preventDefault();
+        });
+
+        whatsappInput.addEventListener('input', function(e) {
+            let value = this.value;
+            // Remove any non-digit characters except + at the start
+            if (value.startsWith('+')) {
+                value = '+' + value.slice(1).replace(/\D/g, '');
+            } else {
+                value = value.replace(/\D/g, '');
+            }
+            this.value = value;
+            
+            const trimmedValue = value.trim();
+            if (trimmedValue === '') {
+                hideError(whatsappError);
+                this.classList.remove('border-red-500', 'border-green-500');
+                return;
+            }
+            if (validatePhone(trimmedValue)) {
+                hideError(whatsappError);
+                this.classList.remove('border-red-500');
+                this.classList.add('border-green-500');
+            } else {
+                showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
+                this.classList.remove('border-green-500');
+                this.classList.add('border-red-500');
+            }
+        });
+
+        whatsappInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value !== '' && !validatePhone(value)) {
+                showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
+                this.classList.add('border-red-500');
+            }
+        });
+
+        // Phone validation - Only allow numbers and + at start
+        phoneInput.addEventListener('keydown', function(e) {
+            const key = e.key;
+            const keyCode = e.keyCode || e.which;
+            
+            // Allow: backspace, delete, tab, escape, enter, arrow keys
+            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
+                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                (keyCode === 65 && e.ctrlKey) ||
+                (keyCode === 67 && e.ctrlKey) ||
+                (keyCode === 86 && e.ctrlKey) ||
+                (keyCode === 88 && e.ctrlKey)) {
+                return;
+            }
+            
+            // Allow numbers (0-9) from main keyboard or numpad
+            if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
+                return;
+            }
+            
+            // Allow + only at the start
+            if (key === '+' && this.value.length === 0) {
+                return;
+            }
+            
+            // Block everything else
+            e.preventDefault();
+        });
+
+        phoneInput.addEventListener('input', function(e) {
+            let value = this.value;
+            // Remove any non-digit characters except + at the start
+            if (value.startsWith('+')) {
+                value = '+' + value.slice(1).replace(/\D/g, '');
+            } else {
+                value = value.replace(/\D/g, '');
+            }
+            this.value = value;
+            
+            const trimmedValue = value.trim();
+            if (trimmedValue === '') {
+                hideError(phoneError);
+                this.classList.remove('border-red-500', 'border-green-500');
+                return;
+            }
+            if (validatePhone(trimmedValue)) {
+                hideError(phoneError);
+                this.classList.remove('border-red-500');
+                this.classList.add('border-green-500');
+            } else {
+                showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
+                this.classList.remove('border-green-500');
+                this.classList.add('border-red-500');
+            }
+        });
+
+        phoneInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value !== '' && !validatePhone(value)) {
+                showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
+                this.classList.add('border-red-500');
+            }
+        });
+
+        // Email validation - Only allow valid email characters
+        emailInput.addEventListener('keydown', function(e) {
+            const key = e.key;
+            const keyCode = e.keyCode || e.which;
+            
+            // Allow: backspace, delete, tab, escape, enter, arrow keys
+            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
+                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                (keyCode === 65 && e.ctrlKey) ||
+                (keyCode === 67 && e.ctrlKey) ||
+                (keyCode === 86 && e.ctrlKey) ||
+                (keyCode === 88 && e.ctrlKey)) {
+                return;
+            }
+            
+            // Allow letters, numbers, @, ., _, -, +
+            const emailRegex = /^[a-zA-Z0-9@._+-]$/;
+            if (!emailRegex.test(key)) {
+                e.preventDefault();
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            const value = this.value.trim();
+            if (value === '') {
+                hideError(emailError);
+                this.classList.remove('border-red-500', 'border-green-500');
+                return;
+            }
+            if (validateEmail(value)) {
+                hideError(emailError);
+                this.classList.remove('border-red-500');
+                this.classList.add('border-green-500');
+            } else {
+                showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
+                this.classList.remove('border-green-500');
+                this.classList.add('border-red-500');
+            }
+        });
+
+        emailInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value !== '' && !validateEmail(value)) {
+                showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
+                this.classList.add('border-red-500');
+            }
+        });
 
         contactChannel.addEventListener('change', function() {
             const selectedValue = this.value;
             
-            // Hide both fields first
+            // Hide all fields first
+            whatsappField.classList.add('hidden');
             phoneField.classList.add('hidden');
             emailField.classList.add('hidden');
+            whatsappInput.removeAttribute('required');
             phoneInput.removeAttribute('required');
             emailInput.removeAttribute('required');
+            whatsappInput.value = '';
+            phoneInput.value = '';
+            emailInput.value = '';
+            
+            // Reset errors and styles
+            hideError(whatsappError);
+            hideError(phoneError);
+            hideError(emailError);
+            whatsappInput.classList.remove('border-red-500', 'border-green-500');
+            phoneInput.classList.remove('border-red-500', 'border-green-500');
+            emailInput.classList.remove('border-red-500', 'border-green-500');
+            
+            // Clear values
+            whatsappInput.value = '';
             phoneInput.value = '';
             emailInput.value = '';
             
             // Show appropriate field based on selection
-            if (selectedValue === 'whatsapp' || selectedValue === 'phone') {
+            if (selectedValue === 'whatsapp') {
+                whatsappField.classList.remove('hidden');
+                whatsappInput.setAttribute('required', 'required');
+            } else if (selectedValue === 'phone') {
                 phoneField.classList.remove('hidden');
                 phoneInput.setAttribute('required', 'required');
             } else if (selectedValue === 'email') {
@@ -756,9 +987,60 @@
             const originalText = btn.textContent;
             const originalBg = btn.style.background;
             
+            // Validate form before submission
+            const selectedChannel = document.getElementById('contactChannel').value;
+            let isValid = true;
+            
+            // Validate contact information based on selected channel
+            if (selectedChannel === 'whatsapp') {
+                const whatsappValue = whatsappInput.value.trim();
+                if (!whatsappValue) {
+                    showError(whatsappError, 'يرجى إدخال رقم واتساب');
+                    whatsappInput.classList.add('border-red-500');
+                    isValid = false;
+                } else if (!validatePhone(whatsappValue)) {
+                    showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
+                    whatsappInput.classList.add('border-red-500');
+                    isValid = false;
+                }
+            } else if (selectedChannel === 'phone') {
+                const phoneValue = phoneInput.value.trim();
+                if (!phoneValue) {
+                    showError(phoneError, 'يرجى إدخال رقم هاتف');
+                    phoneInput.classList.add('border-red-500');
+                    isValid = false;
+                } else if (!validatePhone(phoneValue)) {
+                    showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
+                    phoneInput.classList.add('border-red-500');
+                    isValid = false;
+                }
+            } else if (selectedChannel === 'email') {
+                const emailValue = emailInput.value.trim();
+                if (!emailValue) {
+                    showError(emailError, 'يرجى إدخال بريد إلكتروني');
+                    emailInput.classList.add('border-red-500');
+                    isValid = false;
+                } else if (!validateEmail(emailValue)) {
+                    showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
+                    emailInput.classList.add('border-red-500');
+                    isValid = false;
+                }
+            }
+            
+            // If validation failed, stop submission
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.border-red-500');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+                return;
+            }
+            
             // Disable button and show processing state
             btn.disabled = true;
-            btn.textContent = 'Processing...';
+            btn.textContent = 'جاري المعالجة...';
             btn.style.background = '#48bb78';
             
             // Collect form data
@@ -766,10 +1048,16 @@
                 name: this.querySelector('input[type="text"]').value,
                 decisionType: this.querySelector('select').value,
                 caseDetails: this.querySelector('textarea').value || '',
-                contactChannel: document.getElementById('contactChannel').value,
-                phoneNumber: document.getElementById('phoneInput')?.value || '',
-                email: document.getElementById('emailInput')?.value || ''
+                contactChannel: selectedChannel,
+                phoneNumber: selectedChannel === 'phone' ? (document.getElementById('phoneInput')?.value || '') : '',
+                whatsappNumber: selectedChannel === 'whatsapp' ? (document.getElementById('whatsupnumber')?.value || '') : '',
+                email: selectedChannel === 'email' ? (document.getElementById('emailInput')?.value || '') : '',
+                language: document.getElementById('language').value
             };
+            
+            // Log the payload to console for debugging
+            console.log('📤 Sending Form Data:', formData);
+            console.log('📦 Payload (JSON):', JSON.stringify(formData, null, 2));
             
             try {
                 // Send data to webhook
@@ -781,9 +1069,14 @@
                     body: JSON.stringify(formData)
                 });
                 
+                // Log response for debugging
+                const responseData = await response.json().catch(() => ({}));
+                console.log('✅ Response Status:', response.status);
+                console.log('📥 Response Data:', responseData);
+                
                 if (response.ok) {
                     // Success
-                    btn.textContent = '✓ Submitted Successfully';
+                    btn.textContent = '✓ تم الإرسال بنجاح';
                     btn.style.background = '#28a745';
                     
                     // Twitter conversion tracking event
@@ -792,11 +1085,21 @@
                     // Reset form after 2 seconds
                     setTimeout(() => {
                         this.reset();
-                        // Hide phone/email fields
+                        // Hide all contact fields
+                        whatsappField.classList.add('hidden');
                         phoneField.classList.add('hidden');
                         emailField.classList.add('hidden');
+                        whatsappInput.removeAttribute('required');
                         phoneInput.removeAttribute('required');
                         emailInput.removeAttribute('required');
+                        
+                        // Reset errors and styles
+                        hideError(whatsappError);
+                        hideError(phoneError);
+                        hideError(emailError);
+                        whatsappInput.classList.remove('border-red-500', 'border-green-500');
+                        phoneInput.classList.remove('border-red-500', 'border-green-500');
+                        emailInput.classList.remove('border-red-500', 'border-green-500');
                         
                         btn.textContent = originalText;
                         btn.style.background = originalBg;
@@ -809,7 +1112,7 @@
             } catch (error) {
                 // Handle error
                 console.error('Error submitting form:', error);
-                btn.textContent = '✗ Error - Try Again';
+                btn.textContent = '✗ خطأ - حاول مرة أخرى';
                 btn.style.background = '#dc3545';
                 
                 setTimeout(() => {
