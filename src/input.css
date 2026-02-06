@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* RTL Support */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+    text-align: right;
+    direction: rtl;
+}
+
+[dir="rtl"] .border-l-4 {
+    border-left: none;
+    border-right: 4px solid;
+}
+
+[dir="rtl"] .border-r-4 {
+    border-right: none;
+    border-left: 4px solid;
+}
+
 /* Custom animations */
 @keyframes rotateCW {
     0% { transform: rotate(0deg); }

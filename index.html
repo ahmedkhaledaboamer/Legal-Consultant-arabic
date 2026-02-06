@@ -1,1249 +1,1097 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استشارات قانونية</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'orange': {
-                            'primary': '#fd9908',
-                            'dark': '#e55a2b',
-                            'light': '#ff8c5a',
-                        },
-                        'brown': {
-                            'primary': '#1a2437',
-                            'dark': '#654321',
-                            'light': '#a0522d',
-                        }
-                    },
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    
-    <!-- X conversion tracking base code -->
-    <script>
-    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
-    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
-    twq('config','r283s');
-    </script>
-    <!-- End X conversion tracking base code -->
-    
-    <!-- Facebook Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1526395831808737');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1526395831808737&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-    
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        @keyframes rotateCW {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes rotateCCW {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-360deg); }
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.2); opacity: 0.5; }
-        }
-        
-        /* Clamp Font Sizes */
-        .text-clamp-xs { font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem); }
-        .text-clamp-sm { font-size: clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem); }
-        .text-clamp-base { font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem); }
-        .text-clamp-lg { font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem); }
-        .text-clamp-xl { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
-        .text-clamp-2xl { font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem); }
-        .text-clamp-3xl { font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem); }
-        .text-clamp-4xl { font-size: clamp(1.875rem, 1.5rem + 1.5vw, 3rem); }
-        .text-clamp-5xl { font-size: clamp(2.25rem, 1.75rem + 2vw, 3.75rem); }
-        .text-clamp-6xl { font-size: clamp(3rem, 2.5rem + 2.5vw, 4.5rem); }
-        .text-clamp-hero { font-size: clamp(2rem, 1.5rem + 3vw, 2rem); }
-
-        /* Reduce image height at 1366px to 50% of viewport height */
-        @media (width: 1366px) {
-            .top-section-images > div {
-                height: 50vh !important;
-                max-height: 50vh !important;
-            }
-        }
-        
-        @media (min-width: 1366px) and (max-width: 1367px) {
-            .top-section-images > div {
-                height: 40vh !important;
-                max-height: 40vh !important;
-            }
-            
-            /* Make top section fit viewport */
-            .top-section-container {
-                min-height: calc(100vh - 2rem);
-                max-height: calc(100vh - 2rem);
-                overflow: hidden;
-                padding-top: 1rem !important;
-                padding-bottom: 1rem !important;
-            }
-            
-            .top-section-container > div {
-                height: 100%;
-            }
-            
-            .top-section-container .grid {
-                height: 100%;
-                align-items: stretch;
-            }
-        }
-
-        /* Reduce font sizes at 1366px */
-        @media (min-width: 1366px) and (max-width: 1367px) {
-            .text-clamp-xs { font-size: clamp(0.5rem, 0.35rem + 0.3vw, 0.65rem); }
-            .text-clamp-sm { font-size: clamp(0.625rem, 0.45rem + 0.3vw, 0.75rem); }
-            .text-clamp-base { font-size: clamp(0.75rem, 0.55rem + 0.3vw, 0.85rem); }
-            .text-clamp-lg { font-size: clamp(0.875rem, 0.65rem + 0.3vw, 0.95rem); }
-            .text-clamp-xl { font-size: clamp(1rem, 0.75rem + 0.4vw, 1.2rem); }
-            .text-clamp-2xl { font-size: clamp(1.125rem, 0.85rem + 0.5vw, 1.5rem); }
-            .text-clamp-3xl { font-size: clamp(1.25rem, 1rem + 0.6vw, 1.75rem); }
-            .text-clamp-4xl { font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2.25rem); }
-            .text-clamp-5xl { font-size: clamp(1.875rem, 1.5rem + 1vw, 2.75rem); }
-            .text-clamp-6xl { font-size: clamp(2.25rem, 1.75rem + 1.2vw, 3.5rem); }
-            .text-clamp-hero { font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem); }
-            
-            /* Scale form to fit viewport without scroll */
-            #contactForm {
-                max-height: calc(100vh - 6rem);
-                overflow: hidden;
-                transform-origin: top center;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            #legalForm {
-                transform: scale(0.9);
-                transform-origin: top center;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                gap: 0.75rem !important;
-            }
-            
-            /* Adjust form container spacing */
-            #contactForm h2 {
-                font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem) !important;
-                margin-bottom: 0.25rem !important;
-            }
-            
-            #contactForm p {
-                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
-                margin-bottom: 0.75rem !important;
-            }
-            
-            #contactForm label {
-                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
-                margin-bottom: 0.25rem !important;
-            }
-            
-            #contactForm input,
-            #contactForm select,
-            #contactForm textarea {
-                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
-                padding: 0.5rem 0.75rem !important;
-            }
-            
-            #contactForm button {
-                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
-                padding: 0.5rem !important;
-            }
-            
-            /* Reduce spacing in form wrapper */
-            .top-section-container .space-y-6 > div:last-child {
-                max-height: calc(100vh - 8rem);
-                overflow: hidden;
-            }
-        }
-
-        /* Reduce font sizes at 1633px */
-        @media (min-width: 1650px) {
-            .text-clamp-xs { font-size: clamp(0.625rem, 0.4rem + 0.4vw, 0.7rem); }
-            .text-clamp-sm { font-size: clamp(0.75rem, 0.5rem + 0.4vw, 0.8rem); }
-            .text-clamp-base { font-size: clamp(0.875rem, 0.6rem + 0.4vw, 0.9rem); }
-            .text-clamp-lg { font-size: clamp(1rem, 0.7rem + 0.4vw, 1rem); }
-            .text-clamp-xl { font-size: clamp(1.125rem, 0.8rem + 0.5vw, 1.3rem); }
-            .text-clamp-2xl { font-size: clamp(1.25rem, 0.9rem + 0.7vw, 1.6rem); }
-            .text-clamp-3xl { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); }
-            .text-clamp-4xl { font-size: clamp(1.875rem, 1.2rem + 1.2vw, 2.5rem); }
-            .text-clamp-5xl { font-size: clamp(2.25rem, 1.5rem + 1.5vw, 3rem); }
-            .text-clamp-6xl { font-size: clamp(3rem, 2rem + 2vw, 4rem); }
-            .text-clamp-hero { font-size: clamp(1rem,  1vw, 2rem); }
-        }
-    </style>
-</head>
-<body class="font-inter antialiased bg-white dark:bg-black text-[#1a1a1a] dark:text-white transition-colors duration-300 scroll-smooth">
-    <!-- Preloader -->
-    <div id="preloader" style="position:fixed;inset:0;z-index:9999;display:flex;justify-content:center;align-items:center;background-color:#fff;" class="dark:!bg-black">
-        <div style="position:relative;width:256px;height:256px;display:flex;justify-content:center;align-items:center;">
-
-            <!-- Circle 1 -->
-            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCW 3s linear infinite;" viewBox="0 0 200 200">
-                <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
-                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.3"/>
-                    </linearGradient>
-                </defs>
-                <circle cx="100" cy="100" r="80" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-dasharray="20 200" fill="none" opacity="0.8"/>
-            </svg>
-
-            <!-- Circle 2 -->
-            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCCW 4s linear infinite;" viewBox="0 0 200 200">
-                <defs>
-                    <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
-                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.2"/>
-                    </linearGradient>
-                </defs>
-                <circle cx="100" cy="100" r="90" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="30 180" fill="none" opacity="0.6"/>
-            </svg>
-
-            <!-- Logo -->
-            <div style="position:relative;z-index:10;width:150px;height:150px;display:flex;justify-content:center;align-items:center;animation:pulse 2s ease-in-out infinite;">
-                <img src="./images/logo.webp" 
-                     alt="Logo" 
-                     style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 20px rgba(189,152,35,0.3));">
-            </div>
-
-            <!-- Glow effect -->
-            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle, #ceb361 0%, transparent 70%);animation:pulseGlow 2s ease-in-out infinite;"></div>
-
-        </div>
-    </div>
-
-    <!-- Theme Toggle Button -->
-    <button id="themeToggle" class="fixed top-6 right-6 z-50 w-12 h-12 rounded-full bg-white/90 dark:bg-[#1a1a1a]/90 backdrop-blur-sm flex items-center justify-center hover:bg-white dark:hover:bg-[#2a2a2a] hover:scale-110 transition-all duration-300 shadow-lg border border-[#e0e0e0] dark:border-[#333]">
-        <i class="fas fa-moon text-[#1a1a1a] dark:text-white" id="themeIcon"></i>
-    </button>
-
-    <!-- Top Section: Text Left + Form Right -->
-    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full top-section-container">
-        <div class="w-full px-6 lg:px-12 ">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-32 items-start">
-                <!-- Left: Main Heading and Introduction -->
-                <div class="space-y-6">
-                    <h1 class="text-clamp-xl 2xl:text-5xl    font-bold leading-tight text-brown-primary dark:text-white">
-                        قبل التوقيع، اسأل سؤالاً واحداً:
-                        <span class="text-orange-primary">هل يمكن عكس هذا القرار بموجب القانون الإماراتي؟</span>.
-                    </h1>
-                    
-                    <div class="flex items-start gap-3">
-                        <div class="w-1 h-16 bg-orange-primary mt-1"></div>
-                        <p class="text-clamp-base 2xl:text-2xl  text-[#555] dark:text-[#aaa] font-medium leading-relaxed">
-                            بند واحد خاطئ يمكن أن يوقف كل شيء. مراجعة القرار للاتفاقيات الحساسة والشراكات عالية المخاطر والالتزامات المهمة.
-                        </p>
-                    </div>
-                    
-                   
-                    
-                    <!-- Images -->
-                    <div class="  top-section-images">
-                        <div class="rounded-lg h-[200px] sm:h-[250px] lg:h-[300px] 2xl:h-[550px] overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                            <img src="./images/S4.webp" alt="Office meeting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        </div>
-                         
-                    </div>
-                    
-                 
-                </div>
-
-                <!-- Right: Form -->
-                <div class="space-y-6">
-                  <div  id="contactForm" class="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-xl p-5 lg:p-6 border-2 border-orange-primary/30 dark:border-orange-primary/20 hover:border-orange-primary/50 dark:hover:border-orange-primary/40 hover:shadow-xl transition-all duration-300">
-                    <h2 class="text-clamp-lg 2xl:text-5xl  font-bold text-[#1a1a1a] dark:text-white mb-3">
-                        اطلب <span class="text-orange-primary">مراجعة سرية</span>
-                    </h2>
-                    <p class="text-[9px] 2xl:text-2xl  text-[#666] dark:text-[#aaa] mb-3">
-                        للملفات المهمة فقط. إذا كان قرارك مهماً، قدم التفاصيل أدناه.
-                    </p>
-                    
-                    <form id="legalForm" class="space-y-3 2xl:space-y-12">
-                        <div>
-                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                الاسم <span class="text-orange-primary">*</span>
-                            </label>
-                            <input type="text" placeholder="أدخل اسمك الكامل" required class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs 2xl:text-xl  text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
-                        </div>
-
-                        <div>
-                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                ما نوع القرار القانوني الذي تريد اتخاذه؟ <span class="text-orange-primary">*</span>
-                            </label>
-                            <div class="relative">
-                                <select id="decisionType" required class="w-full 2xl:text-lg  px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer pr-8">
-                                    <option value="">اختر نوع القرار</option>
-                                    <option value="dispute">تأسيس شركة / إعادة هيكلة</option>
-                                    <option value="contract">اتفاقية شركاء أو مساهمين</option>
-                                    <option value="partnership">تأشيرة ذهبية / قضايا الإقامة</option>
-                                    <option value="investment">عقد أو التزام ذو قيمة عالية</option>
-                                    <option value="compliance">التعرض التنظيمي أو الامتثال</option>
-                                    <option value="other">مسألة قانونية أخرى ذات تأثير</option>
-                                </select>
-                                <i class="fas fa-chevron-down absolute left-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                تفاصيل القضية <span class="text-[#999] dark:text-[#666] text-[8px] 2xl:text-md">(اختياري)</span>
-                            </label>
-                            <textarea placeholder="قدم تفاصيل إضافية عن قضيتك..." rows="2" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] 2xl:text-lg border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666] resize-none"></textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                كيف تريد التواصل معك للمراجعة السرية؟ <span class="text-orange-primary">*</span>
-                            </label>
-                            <div class="relative">
-                                <select id="contactChannel" required class="w-full px-2.5  2xl:text-lg py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer pr-8">
-                                    <option value="">اختر قناة التواصل</option>
-                                    <option value="whatsapp">واتس اب</option>
-                                    <option value="phone">اتصال هاتفي</option>
-                                    <option value="email">البريد الإلكتروني</option>
-                                </select>
-                                <i class="fas fa-chevron-down absolute left-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
-                            </div>
-                        </div>
-
-                        <!-- WhatsApp Number Field (shown when WhatsApp is selected) -->
-                        <div id="whatsappField" class="hidden">
-                            <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                رقم واتس اب <span class="text-orange-primary">*</span>
-                            </label>
-                            <input type="tel" id="whatsupnumber" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
-                            <p id="whatsappError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
-                        </div>
-
-                        <!-- Phone Number Field (shown when Phone is selected) -->
-                        <div id="phoneField" class="hidden">
-                            <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                رقم الهاتف <span class="text-orange-primary">*</span>
-                            </label>
-                            <input type="tel" id="phoneInput" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
-                            <p id="phoneError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
-                        </div>
-
-                        <!-- Email Field (shown when Email is selected) -->
-                        <div id="emailField" class="hidden">
-                            <label class="block text-[9px] 2xl:text-xl font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
-                                عنوان البريد الإلكتروني <span class="text-orange-primary">*</span>
-                            </label>
-                            <input type="email" id="emailInput" placeholder="your.email@example.com" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
-                            <p id="emailError" class="hidden text-[8px] 2xl:text-sm text-red-500 mt-1"></p>
-                        </div>
-
-                        <!-- Language Field (hidden, always sent with value 'arabic') -->
-                        <input type="hidden" id="language" value="arabic">
-
-                        <button type="submit" class="w-full 2l:text-xl py-2 bg-orange-primary text-white rounded-lg font-bold text-xs hover:bg-orange-dark hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-wider">
-                            اطلب استشارة خبير
-                        </button>
-                    </form>
-                  </div>
-                     <!-- Tags -->
-                     <div class="flex flex-wrap items-center justify-center gap-3">
-                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
-                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">التوقيع قريب</span>
-                        </div>
-                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
-                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">قيمة مادية</span>
-                        </div>
-                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
-                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">السمعة في خطر</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section: Three Cards -->
-    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
-        <div class="w-full px-6 lg:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1: Expert Consultation -->
-                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
-                        <img src="./images/S5.webp" alt="استشارة خبير" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">استشارة خبير</h3>
-                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">الوصول المباشر إلى كبار المستشارين القانونيين</p>
-                    </div>
-                </div>
-
-                <!-- Card 2: Document Review -->
-                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
-                        <img src="./images/S7.webp" alt="مراجعة المستندات" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">مراجعة المستندات</h3>
-                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">تحليل شامل لكل بند</p>
-                    </div>
-                </div>
-
-                <!-- Card 3: Strategic Planning -->
-                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
-                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
-                        <img src="./images/S6.webp" alt="التخطيط الاستراتيجي" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">التخطيط الاستراتيجي</h3>
-                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">تخطيط النتائج قبل الالتزام</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Lower Section: Text Left + Image Right -->
-    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
-        <div class="w-full px-6 lg:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                <!-- Left: Content Text -->
-                <div class="space-y-8">
-                    <h2 class="text-clamp-2xl font-bold leading-tight text-brown-primary dark:text-white">
-                        معظم المشاكل القانونية <span class="text-orange-primary">تبدأ</span> قبل المحكمة — في القرار.
-                    </h2>
-                    
-                    <p class="text-clamp-base text-[#666] dark:text-[#999] leading-relaxed">
-                        لا تبدأ المشاكل القانونية في التقاضي. تبدأ عند الالتزام. اللحظة التي يتم فيها التوقيع، أو تكوين شراكة، أو تأخير استشارة، تتخذ المخاطر شكلاً.
-                    </p>
-                    
-                    <!-- Decision Points Cards -->
-                    <div class="grid grid-cols-3 gap-4 my-8">
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-pen-fancy text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
-                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">توقيع.</p>
-                        </div>
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-users text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
-                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">شراكة.</p>
-                        </div>
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-comments text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
-                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">استشارة.</p>
-                        </div>
-                    </div>
-                    
-                    <p class="text-clamp-xs text-[#999] dark:text-[#666] uppercase tracking-wider mb-4 inline-block px-4 py-2 rounded-lg border-2 border-transparent hover:border-orange-primary transition-all duration-300 cursor-pointer">
-                        كل نقطة قرار تحمل عواقب محتملة:
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
-                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">النزاعات</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
-                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">قيود السفر</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
-                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">تجميد الأصول</span>
-                        </div>
-                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
-                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">التقاضي التجاري</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#f5f5f5] dark:bg-[#1a1a1a] rounded-lg p-6 border-l-4 border-orange-primary mt-8 hover:border-orange-dark hover:shadow-lg hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer">
-                        <p class="text-clamp-base text-[#1a1a1a] dark:text-white leading-relaxed">
-                            "الوقاية أفضل من النزاعات. الوضوح أفضل من التفاؤل. المسؤولية أفضل من التخمين. إذا كان قرارك يحمل وزناً مادياً، فإنه يستحق مراجعة متأنية قبل الالتزام."
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Right: Strategic Protection Image + Built for Card -->
-                <div class="space-y-6">
-                    <!-- Strategic Protection Card -->
-                    <div class="relative rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] group hover:border-orange-primary hover:shadow-xl transition-all duration-300 cursor-pointer">
-                        <div class="h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[500px] overflow-hidden">
-                            <img src="./images/S3.webp" alt="الحماية الاستراتيجية" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-12 h-12 bg-orange-primary rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-clock text-white text-xl"></i>
-                                </div>
-                                <h3 class="text-clamp-xl font-bold text-white">الحماية الاستراتيجية</h3>
-                            </div>
-                            <p class="text-clamp-sm text-white/90">
-                                تقييم شامل للمخاطر للقرارات عالية الأهمية. نحن نحمي مصالحك قبل أن تتعرض للتهديد.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Built for Card -->
-                    <div class="bg-white dark:bg-[#0a0a0a] rounded-xl p-8 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-lg transition-all duration-300 cursor-pointer">
-                        <h3 class="text-clamp-sm font-bold text-orange-primary mb-6 uppercase tracking-wider">
-                            مبني للقرارات المهمة
-                        </h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
-                                <i class="fas fa-check text-orange-primary mt-1"></i>
-                                <span>العقود ذات القيمة العالية</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
-                                <i class="fas fa-check text-orange-primary mt-1"></i>
-                                <span>تنظيم الشراكة</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
-                                <i class="fas fa-check text-orange-primary mt-1"></i>
-                                <span>مراجعة المخاطر قبل النزاع</span>
-                            </li>
-                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
-                                <i class="fas fa-check text-orange-primary mt-1"></i>
-                                <span>قضايا السمعة</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- VIP Legal Protection Program Section -->
-    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
-        <div class="w-full px-6 lg:px-12  ">
-            <div class="bg-gradient-to-br from-[#1e293b] to-[#0f172a] dark:from-[#0a0a0a] dark:to-[#000] rounded-3xl p-6 lg:p-8 overflow-hidden border border-[#334155] dark:border-[#1a1a1a] shadow-2xl hover:shadow-orange-primary/20 transition-all duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <!-- Left Section: Program Details -->
-                    <div class="space-y-4">
-                        <!-- Executive Access Tag -->
-                        <div class="inline-flex items-center gap-2 bg-orange-primary/20 border-2 border-orange-primary rounded-full px-3 py-1.5 hover:bg-orange-primary/30 transition-all duration-300 cursor-pointer group">
-                            <i class="fas fa-check-circle text-orange-primary text-sm group-hover:scale-110 transition-transform duration-300"></i>
-                            <span class="text-white text-[9px] uppercase tracking-wider">وصول تنفيذي</span>
-                        </div>
-
-                        <!-- Title -->
-                        <h2 class="text-clamp-xl font-bold text-white leading-tight">
-                            برنامج الحماية القانونية <span class="text-orange-primary">VIP</span>
-                        </h2>
-
-                        <!-- Description -->
-                        <p class="text-clamp-sm text-white/80 leading-relaxed">
-                            للمديرين والمتخذي القرارات الذين يحتاجون إلى أعلى مستوى من الاستشارة القانونية والحماية الاستراتيجية.
-                        </p>
-
-                        <!-- Program Benefits -->
-                        <div class="space-y-3">
-                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
-                                <div class="flex items-start gap-3">
-                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
-                                    <div>
-                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">الاستجابة ذات الأولوية</h3>
-                                        <p class="text-xs text-white/70">مراجعة مخصصة مدة 24 ساعة للمسائل العاجلة</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
-                                <div class="flex items-start gap-3">
-                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
-                                    <div>
-                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">الوصول المباشر لكبار المستشارين</h3>
-                                        <p class="text-xs text-white/70">خط مباشر إلى أكثر مستشارينا خبرة</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
-                                <div class="flex items-start gap-3">
-                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
-                                    <div>
-                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">تخطيط شامل للمخاطر</h3>
-                                        <p class="text-xs text-white/70">تحليل السيناريوهات الكامل لكل قرار</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                       
-                    </div>
-
-                    <!-- Right Section: Image with Statistics -->
-                    <div class="relative rounded-2xl overflow-hidden group">
-                        <div class="h-[400px] lg:h-[450px] overflow-hidden">
-                            <img src="./images/S8.webp" alt="VIP Protection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        
-                        <!-- Statistics Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
-                            <div class="grid grid-cols-3 gap-3">
-                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
-                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">$2B+</div>
-                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">Protected</p>
-                                </div>
-                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
-                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">50+</div>
-                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">VIP Clients</p>
-                                </div>
-                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
-                                    <div class="text-clamp-2xl font-bold text-orange-primary mb-0.5">100%</div>
-                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">Confidential</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Disclaimer -->
-                <div class="text-center mt-6 pt-4 border-t border-[#334155] dark:border-[#1a1a1a]">
-                    <p class="text-[9px] text-white/50 uppercase tracking-widest">
-                        بالدعوة أو التأهيل فقط • الإتاحة محدودة
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 bg-gradient-to-r from-orange-primary/10 via-orange-primary/5 to-orange-primary/10 dark:from-orange-primary/20 dark:via-orange-primary/10 dark:to-orange-primary/20 border-t border-orange-primary/30 dark:border-orange-primary/20 w-full">
-        <div class="w-full px-6 lg:px-12">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider">
-                    © 2024 استشارات قانونية FZC LLC
-                </p>
-                <div class="flex gap-6">
-                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">سياسة الخصوصية</a>
-                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">شروط الخدمة</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-    <script>
-        // Theme Toggle - Set before page loads
-        const html = document.documentElement;
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        const preloader = document.getElementById('preloader');
-        
-        if (currentTheme === 'dark') {
-            html.classList.add('dark');
-            if (preloader) {
-                preloader.style.backgroundColor = '#000';
-            }
-        } else {
-            html.classList.remove('dark');
-            if (preloader) {
-                preloader.style.backgroundColor = '#fff';
-            }
-        }
-
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                if (preloader) {
-                    preloader.style.transition = 'opacity 0.6s ease-in-out';
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                        
-                        // Scroll to form on mobile devices
-                        const isMobile = window.innerWidth < 1024; // lg breakpoint
-                        if (isMobile) {
-                            const formElement = document.getElementById('contactForm');
-                            if (formElement) {
-                                setTimeout(() => {
-                                    formElement.scrollIntoView({ 
-                                        behavior: 'smooth', 
-                                        block: 'start' 
-                                    });
-                                }, 100);
+                 <!DOCTYPE html>
+                <html lang="ar" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>الاستشارات القانونية</title>
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                
+                    <script src="https://cdn.tailwindcss.com"></script>
+                    <script>
+                        tailwind.config = {
+                            darkMode: 'class',
+                            theme: {
+                                extend: {
+                                    colors: {
+                                        'orange': {
+                                            'primary': '#fd9908',
+                                            'dark': '#e55a2b',
+                                            'light': '#ff8c5a',
+                                        },
+                                        'brown': {
+                                            'primary': '#1a2437',
+                                            'dark': '#654321',
+                                            'light': '#a0522d',
+                                        }
+                                    },
+                                    fontFamily: {
+                                        'inter': ['Inter', 'sans-serif'],
+                                    },
+                                }
                             }
                         }
-                    }, 600);
-                }
-            }, 500);
-        });
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-
-        if (currentTheme === 'dark') {
-            themeIcon.className = 'fas fa-sun text-white';
-        } else {
-            themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
-            
-            if (isDark) {
-                themeIcon.className = 'fas fa-sun text-white';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Contact Channel Toggle
-        const contactChannel = document.getElementById('contactChannel');
-        const whatsappField = document.getElementById('whatsappField');
-        const phoneField = document.getElementById('phoneField');
-        const emailField = document.getElementById('emailField');
-        const whatsappInput = document.getElementById('whatsupnumber');
-        const phoneInput = document.getElementById('phoneInput');
-        const emailInput = document.getElementById('emailInput');
-        const whatsappError = document.getElementById('whatsappError');
-        const phoneError = document.getElementById('phoneError');
-        const emailError = document.getElementById('emailError');
-
-        // Validation functions
-        function validatePhone(phone) {
-            // Remove all non-digit characters except +
-            const cleanPhone = phone.replace(/[^\d+]/g, '');
-            // Check if it starts with + and has at least 10 digits, or has at least 9 digits without +
-            if (cleanPhone.startsWith('+')) {
-                const digits = cleanPhone.slice(1);
-                return digits.length >= 9 && digits.length <= 15;
-            } else {
-                return cleanPhone.length >= 9 && cleanPhone.length <= 15;
-            }
-        }
-
-        function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function showError(errorElement, message) {
-            errorElement.textContent = message;
-            errorElement.classList.remove('hidden');
-        }
-
-        function hideError(errorElement) {
-            errorElement.classList.add('hidden');
-            errorElement.textContent = '';
-        }
-
-        // WhatsApp validation - Only allow numbers and + at start
-        whatsappInput.addEventListener('keydown', function(e) {
-            const key = e.key;
-            const keyCode = e.keyCode || e.which;
-            
-            // Allow: backspace, delete, tab, escape, enter, arrow keys
-            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
-                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-                (keyCode === 65 && e.ctrlKey) ||
-                (keyCode === 67 && e.ctrlKey) ||
-                (keyCode === 86 && e.ctrlKey) ||
-                (keyCode === 88 && e.ctrlKey)) {
-                return;
-            }
-            
-            // Allow numbers (0-9) from main keyboard or numpad
-            if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
-                return;
-            }
-            
-            // Allow + only at the start
-            if (key === '+' && this.value.length === 0) {
-                return;
-            }
-            
-            // Block everything else
-            e.preventDefault();
-        });
-
-        whatsappInput.addEventListener('input', function(e) {
-            let value = this.value;
-            // Remove any non-digit characters except + at the start
-            if (value.startsWith('+')) {
-                value = '+' + value.slice(1).replace(/\D/g, '');
-            } else {
-                value = value.replace(/\D/g, '');
-            }
-            this.value = value;
-            
-            const trimmedValue = value.trim();
-            if (trimmedValue === '') {
-                hideError(whatsappError);
-                this.classList.remove('border-red-500', 'border-green-500');
-                return;
-            }
-            if (validatePhone(trimmedValue)) {
-                hideError(whatsappError);
-                this.classList.remove('border-red-500');
-                this.classList.add('border-green-500');
-            } else {
-                showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
-                this.classList.remove('border-green-500');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        whatsappInput.addEventListener('blur', function() {
-            const value = this.value.trim();
-            if (value !== '' && !validatePhone(value)) {
-                showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        // Phone validation - Only allow numbers and + at start
-        phoneInput.addEventListener('keydown', function(e) {
-            const key = e.key;
-            const keyCode = e.keyCode || e.which;
-            
-            // Allow: backspace, delete, tab, escape, enter, arrow keys
-            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
-                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-                (keyCode === 65 && e.ctrlKey) ||
-                (keyCode === 67 && e.ctrlKey) ||
-                (keyCode === 86 && e.ctrlKey) ||
-                (keyCode === 88 && e.ctrlKey)) {
-                return;
-            }
-            
-            // Allow numbers (0-9) from main keyboard or numpad
-            if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 96 && keyCode <= 105)) {
-                return;
-            }
-            
-            // Allow + only at the start
-            if (key === '+' && this.value.length === 0) {
-                return;
-            }
-            
-            // Block everything else
-            e.preventDefault();
-        });
-
-        phoneInput.addEventListener('input', function(e) {
-            let value = this.value;
-            // Remove any non-digit characters except + at the start
-            if (value.startsWith('+')) {
-                value = '+' + value.slice(1).replace(/\D/g, '');
-            } else {
-                value = value.replace(/\D/g, '');
-            }
-            this.value = value;
-            
-            const trimmedValue = value.trim();
-            if (trimmedValue === '') {
-                hideError(phoneError);
-                this.classList.remove('border-red-500', 'border-green-500');
-                return;
-            }
-            if (validatePhone(trimmedValue)) {
-                hideError(phoneError);
-                this.classList.remove('border-red-500');
-                this.classList.add('border-green-500');
-            } else {
-                showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
-                this.classList.remove('border-green-500');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        phoneInput.addEventListener('blur', function() {
-            const value = this.value.trim();
-            if (value !== '' && !validatePhone(value)) {
-                showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        // Email validation - Only allow valid email characters
-        emailInput.addEventListener('keydown', function(e) {
-            const key = e.key;
-            const keyCode = e.keyCode || e.which;
-            
-            // Allow: backspace, delete, tab, escape, enter, arrow keys
-            if (['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key) ||
-                // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-                (keyCode === 65 && e.ctrlKey) ||
-                (keyCode === 67 && e.ctrlKey) ||
-                (keyCode === 86 && e.ctrlKey) ||
-                (keyCode === 88 && e.ctrlKey)) {
-                return;
-            }
-            
-            // Allow letters, numbers, @, ., _, -, +
-            const emailRegex = /^[a-zA-Z0-9@._+-]$/;
-            if (!emailRegex.test(key)) {
-                e.preventDefault();
-            }
-        });
-
-        emailInput.addEventListener('input', function() {
-            const value = this.value.trim();
-            if (value === '') {
-                hideError(emailError);
-                this.classList.remove('border-red-500', 'border-green-500');
-                return;
-            }
-            if (validateEmail(value)) {
-                hideError(emailError);
-                this.classList.remove('border-red-500');
-                this.classList.add('border-green-500');
-            } else {
-                showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
-                this.classList.remove('border-green-500');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        emailInput.addEventListener('blur', function() {
-            const value = this.value.trim();
-            if (value !== '' && !validateEmail(value)) {
-                showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
-                this.classList.add('border-red-500');
-            }
-        });
-
-        contactChannel.addEventListener('change', function() {
-            const selectedValue = this.value;
-            
-            // Hide all fields first
-            whatsappField.classList.add('hidden');
-            phoneField.classList.add('hidden');
-            emailField.classList.add('hidden');
-            whatsappInput.removeAttribute('required');
-            phoneInput.removeAttribute('required');
-            emailInput.removeAttribute('required');
-            whatsappInput.value = '';
-            phoneInput.value = '';
-            emailInput.value = '';
-            
-            // Reset errors and styles
-            hideError(whatsappError);
-            hideError(phoneError);
-            hideError(emailError);
-            whatsappInput.classList.remove('border-red-500', 'border-green-500');
-            phoneInput.classList.remove('border-red-500', 'border-green-500');
-            emailInput.classList.remove('border-red-500', 'border-green-500');
-            
-            // Clear values
-            whatsappInput.value = '';
-            phoneInput.value = '';
-            emailInput.value = '';
-            
-            // Show appropriate field based on selection
-            if (selectedValue === 'whatsapp') {
-                whatsappField.classList.remove('hidden');
-                whatsappInput.setAttribute('required', 'required');
-            } else if (selectedValue === 'phone') {
-                phoneField.classList.remove('hidden');
-                phoneInput.setAttribute('required', 'required');
-            } else if (selectedValue === 'email') {
-                emailField.classList.remove('hidden');
-                emailInput.setAttribute('required', 'required');
-            }
-        });
-
-        // Form submission
-        document.getElementById('legalForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
-            const originalBg = btn.style.background;
-            
-            // Validate form before submission
-            const selectedChannel = document.getElementById('contactChannel').value;
-            let isValid = true;
-            
-            // Validate contact information based on selected channel
-            if (selectedChannel === 'whatsapp') {
-                const whatsappValue = whatsappInput.value.trim();
-                if (!whatsappValue) {
-                    showError(whatsappError, 'يرجى إدخال رقم واتساب');
-                    whatsappInput.classList.add('border-red-500');
-                    isValid = false;
-                } else if (!validatePhone(whatsappValue)) {
-                    showError(whatsappError, 'يرجى إدخال رقم واتساب صحيح (9-15 رقم)');
-                    whatsappInput.classList.add('border-red-500');
-                    isValid = false;
-                }
-            } else if (selectedChannel === 'phone') {
-                const phoneValue = phoneInput.value.trim();
-                if (!phoneValue) {
-                    showError(phoneError, 'يرجى إدخال رقم هاتف');
-                    phoneInput.classList.add('border-red-500');
-                    isValid = false;
-                } else if (!validatePhone(phoneValue)) {
-                    showError(phoneError, 'يرجى إدخال رقم هاتف صحيح (9-15 رقم)');
-                    phoneInput.classList.add('border-red-500');
-                    isValid = false;
-                }
-            } else if (selectedChannel === 'email') {
-                const emailValue = emailInput.value.trim();
-                if (!emailValue) {
-                    showError(emailError, 'يرجى إدخال بريد إلكتروني');
-                    emailInput.classList.add('border-red-500');
-                    isValid = false;
-                } else if (!validateEmail(emailValue)) {
-                    showError(emailError, 'يرجى إدخال بريد إلكتروني صحيح');
-                    emailInput.classList.add('border-red-500');
-                    isValid = false;
-                }
-            }
-            
-            // If validation failed, stop submission
-            if (!isValid) {
-                // Scroll to first error
-                const firstError = document.querySelector('.border-red-500');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    firstError.focus();
-                }
-                return;
-            }
-            
-            // Disable button and show processing state
-            btn.disabled = true;
-            btn.textContent = 'جاري المعالجة...';
-            btn.style.background = '#48bb78';
-            
-            // Collect form data
-            const formData = {
-                name: this.querySelector('input[type="text"]').value,
-                decisionType: this.querySelector('select').value,
-                caseDetails: this.querySelector('textarea').value || '',
-                contactChannel: selectedChannel,
-                phoneNumber: selectedChannel === 'phone' ? (document.getElementById('phoneInput')?.value || '') : '',
-                whatsappNumber: selectedChannel === 'whatsapp' ? (document.getElementById('whatsupnumber')?.value || '') : '',
-                email: selectedChannel === 'email' ? (document.getElementById('emailInput')?.value || '') : '',
-                language: document.getElementById('language').value
-            };
-            
-            // Log the payload to console for debugging
-            console.log('📤 Sending Form Data:', formData);
-            console.log('📦 Payload (JSON):', JSON.stringify(formData, null, 2));
-            
-            try {
-                // Send data to webhook
-                const response = await fetch('https://shazmlc.cloud/webhook/website-form', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                // Log response for debugging
-                const responseData = await response.json().catch(() => ({}));
-                console.log('✅ Response Status:', response.status);
-                console.log('📥 Response Data:', responseData);
-                
-                if (response.ok) {
-                    // Success
-                    btn.textContent = '✓ تم الإرسال بنجاح';
-                    btn.style.background = '#28a745';
+                    </script>
                     
-                    // Twitter conversion tracking event
-                    twq('event', 'Lead');
+                    <!-- X conversion tracking base code -->
+                    <script>
+                    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+                    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+                    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+                    twq('config','r283s');
+                    </script>
+                    <!-- End X conversion tracking base code -->
                     
-                    // Reset form after 2 seconds
-                    setTimeout(() => {
-                        this.reset();
-                        // Hide all contact fields
-                        whatsappField.classList.add('hidden');
-                        phoneField.classList.add('hidden');
-                        emailField.classList.add('hidden');
-                        whatsappInput.removeAttribute('required');
-                        phoneInput.removeAttribute('required');
-                        emailInput.removeAttribute('required');
+                    <!-- Facebook Pixel Code -->
+                    <!-- Meta Pixel Code -->
+                <script>
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,'script',
+                    'https://connect.facebook.net/en_US/fbevents.js');
+                    fbq('init', '917440290980553');
+                    fbq('track', 'PageView');
+                    </script>
+                    <noscript><img height="1" width="1" style="display:none"
+                    src="https://www.facebook.com/tr?id=917440290980553&ev=PageView&noscript=1"
+                    /></noscript>
+                    <!-- End Meta Pixel Code -->
+                    <noscript><img height="1" width="1" style="display:none"
+                    src="https://www.facebook.com/tr?id=1526395831808737&ev=PageView&noscript=1"
+                    /></noscript>
+                    <!-- End Facebook Pixel Code -->
+                    
+                    <link rel="stylesheet" href="styles.css">
+                    <style>
+                        /* RTL Support */
+                        [dir="rtl"] {
+                            direction: rtl;
+                            text-align: right;
+                        }
                         
-                        // Reset errors and styles
-                        hideError(whatsappError);
-                        hideError(phoneError);
-                        hideError(emailError);
-                        whatsappInput.classList.remove('border-red-500', 'border-green-500');
-                        phoneInput.classList.remove('border-red-500', 'border-green-500');
-                        emailInput.classList.remove('border-red-500', 'border-green-500');
+                        [dir="rtl"] .flex {
+                            flex-direction: row-reverse;
+                        }
                         
-                        btn.textContent = originalText;
-                        btn.style.background = originalBg;
-                        btn.disabled = false;
-                    }, 2000);
-                } else {
-                    // Error response
-                    throw new Error('Failed to submit form');
-                }
-            } catch (error) {
-                // Handle error
-                console.error('Error submitting form:', error);
-                btn.textContent = '✗ خطأ - حاول مرة أخرى';
-                btn.style.background = '#dc3545';
+                        [dir="rtl"] .flex-row {
+                            flex-direction: row-reverse;
+                        }
+                        
+                        [dir="rtl"] .space-x-3 > * + * {
+                            margin-right: 0.75rem;
+                            margin-left: 0;
+                        }
+                        
+                        [dir="rtl"] .space-x-6 > * + * {
+                            margin-right: 1.5rem;
+                            margin-left: 0;
+                        }
+                        
+                        [dir="rtl"] input,
+                        [dir="rtl"] textarea,
+                        [dir="rtl"] select {
+                            text-align: right;
+                        }
+                        
+                        [dir="rtl"] .border-l-4 {
+                            border-left: none;
+                            border-right: 4px solid;
+                        }
+                        
+                        [dir="rtl"] .border-r-4 {
+                            border-right: none;
+                            border-left: 4px solid;
+                        }
+                        
+                        [dir="rtl"] .items-start {
+                            align-items: flex-start;
+                        }
+                        
+                        [dir="rtl"] .justify-start {
+                            justify-content: flex-start;
+                        }
+                        
+                        [dir="rtl"] .justify-end {
+                            justify-content: flex-end;
+                        }
+                        
+                        [dir="rtl"] .justify-between {
+                            justify-content: space-between;
+                        }
+                        
+                        [dir="rtl"] .text-left {
+                            text-align: right;
+                        }
+                        
+                        [dir="rtl"] .text-right {
+                            text-align: left;
+                        }
+                        
+                        [dir="rtl"] .text-center {
+                            text-align: center;
+                        }
+                        
+                        @keyframes rotateCW {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                        @keyframes rotateCCW {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(-360deg); }
+                        }
+                        @keyframes pulse {
+                            0%, 100% { transform: scale(1); opacity: 0.9; }
+                            50% { transform: scale(1.1); opacity: 1; }
+                        }
+                        @keyframes pulseGlow {
+                            0%, 100% { transform: scale(1); opacity: 0.3; }
+                            50% { transform: scale(1.2); opacity: 0.5; }
+                        }
+                        
+                        /* Clamp Font Sizes */
+                        .text-clamp-xs { font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem); }
+                        .text-clamp-sm { font-size: clamp(0.75rem, 0.625rem + 0.5vw, 0.875rem); }
+                        .text-clamp-base { font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem); }
+                        .text-clamp-lg { font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem); }
+                        .text-clamp-xl { font-size: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); }
+                        .text-clamp-2xl { font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem); }
+                        .text-clamp-3xl { font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem); }
+                        .text-clamp-4xl { font-size: clamp(1.875rem, 1.5rem + 1.5vw, 3rem); }
+                        .text-clamp-5xl { font-size: clamp(2.25rem, 1.75rem + 2vw, 3.75rem); }
+                        .text-clamp-6xl { font-size: clamp(3rem, 2.5rem + 2.5vw, 4.5rem); }
+                        .text-clamp-hero { font-size: clamp(2rem, 1.5rem + 3vw, 2rem); }
                 
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.background = originalBg;
-                    btn.disabled = false;
-                }, 3000);
-            }
-        });
-
-        // Testimonials Slider
-        const testimonialsData = [
-            {
-                quote: "The level of detail and foresight in their review saved us from a potentially catastrophic partnership agreement. They identified clauses that would have cost us millions.",
-                name: "Ahmed Al-Mansouri",
-                title: "CEO, Emirates Tech Holdings",
-                initials: "AM"
-            },
-            {
-                quote: "Their scenario planning approach is unmatched. They mapped out every possible outcome before we signed, giving us the confidence to proceed with clarity.",
-                name: "Sarah Johnson",
-                title: "General Counsel, Global Ventures",
-                initials: "SJ"
-            },
-            {
-                quote: "Professional, thorough, and strategic. They don't just review documents—they protect your interests with precision and expertise.",
-                name: "Mohammed Al-Hashimi",
-                title: "Managing Partner, Horizon Capital",
-                initials: "MH"
-            }
-        ];
-
-        let currentSlide = 0;
-
-        function renderTestimonials() {
-            const container = document.getElementById('testimonialsContainer');
-            const dotsContainer = document.getElementById('dotsContainer');
-            
-            // Check if elements exist before manipulating them
-            if (!container || !dotsContainer) {
-                return;
-            }
-            
-            container.innerHTML = '';
-            dotsContainer.innerHTML = '';
-            
-            testimonialsData.forEach((testimonial, index) => {
-                // Testimonial card
-                const card = document.createElement('div');
-                card.className = 'min-w-full md:min-w-[calc(33.333%-1rem)] px-4';
-                card.innerHTML = `
-                    <div class="bg-white dark:bg-[#0a0a0a] rounded-2xl p-10 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-2xl transition-all duration-300 h-full group">
-                        <div class="flex gap-1 mb-6">
-                            ${Array(5).fill(0).map(() => '<i class="fas fa-star text-orange-primary text-lg"></i>').join('')}
-                        </div>
-                        <p class="text-clamp-lg text-[#333] dark:text-[#ccc] mb-8 leading-relaxed italic min-h-[120px]">
-                            "${testimonial.quote}"
-                        </p>
-                        <div class="flex items-center gap-4 pt-4 border-t border-[#e0e0e0] dark:border-[#333]">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-primary/20 to-orange-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-orange-primary font-bold text-clamp-base">${testimonial.initials}</span>
+                        /* Reduce image height at 1366px to 50% of viewport height */
+                        @media (width: 1366px) {
+                            .top-section-images > div {
+                                height: 50vh !important;
+                                max-height: 50vh !important;
+                            }
+                        }
+                        
+                        @media (min-width: 1366px) and (max-width: 1367px) {
+                            .top-section-images > div {
+                                height: 40vh !important;
+                                max-height: 40vh !important;
+                            }
+                            
+                            /* Make top section fit viewport */
+                            .top-section-container {
+                                min-height: calc(100vh - 2rem);
+                                max-height: calc(100vh - 2rem);
+                                overflow: hidden;
+                                padding-top: 1rem !important;
+                                padding-bottom: 1rem !important;
+                            }
+                            
+                            .top-section-container > div {
+                                height: 100%;
+                            }
+                            
+                            .top-section-container .grid {
+                                height: 100%;
+                                align-items: stretch;
+                            }
+                        }
+                
+                        /* Reduce font sizes at 1366px */
+                        @media (min-width: 1366px) and (max-width: 1367px) {
+                            .text-clamp-xs { font-size: clamp(0.5rem, 0.35rem + 0.3vw, 0.65rem); }
+                            .text-clamp-sm { font-size: clamp(0.625rem, 0.45rem + 0.3vw, 0.75rem); }
+                            .text-clamp-base { font-size: clamp(0.75rem, 0.55rem + 0.3vw, 0.85rem); }
+                            .text-clamp-lg { font-size: clamp(0.875rem, 0.65rem + 0.3vw, 0.95rem); }
+                            .text-clamp-xl { font-size: clamp(1rem, 0.75rem + 0.4vw, 1.2rem); }
+                            .text-clamp-2xl { font-size: clamp(1.125rem, 0.85rem + 0.5vw, 1.5rem); }
+                            .text-clamp-3xl { font-size: clamp(1.25rem, 1rem + 0.6vw, 1.75rem); }
+                            .text-clamp-4xl { font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2.25rem); }
+                            .text-clamp-5xl { font-size: clamp(1.875rem, 1.5rem + 1vw, 2.75rem); }
+                            .text-clamp-6xl { font-size: clamp(2.25rem, 1.75rem + 1.2vw, 3.5rem); }
+                            .text-clamp-hero { font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem); }
+                            
+                            /* Scale form to fit viewport without scroll */
+                            #contactForm {
+                                max-height: calc(100vh - 6rem);
+                                overflow: hidden;
+                                transform-origin: top center;
+                                display: flex;
+                                flex-direction: column;
+                            }
+                            
+                            #legalForm {
+                                transform: scale(0.9);
+                                transform-origin: top center;
+                                flex: 1;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 0.75rem !important;
+                            }
+                            
+                            /* Adjust form container spacing */
+                            #contactForm h2 {
+                                font-size: clamp(1rem, 0.8rem + 0.5vw, 1.5rem) !important;
+                                margin-bottom: 0.25rem !important;
+                            }
+                            
+                            #contactForm p {
+                                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
+                                margin-bottom: 0.75rem !important;
+                            }
+                            
+                            #contactForm label {
+                                font-size: clamp(0.6rem, 0.5rem + 0.3vw, 0.8rem) !important;
+                                margin-bottom: 0.25rem !important;
+                            }
+                            
+                            #contactForm input,
+                            #contactForm select,
+                            #contactForm textarea {
+                                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
+                                padding: 0.5rem 0.75rem !important;
+                            }
+                            
+                            #contactForm button {
+                                font-size: clamp(0.7rem, 0.6rem + 0.3vw, 0.9rem) !important;
+                                padding: 0.5rem !important;
+                            }
+                            
+                            /* Reduce spacing in form wrapper */
+                            .top-section-container .space-y-6 > div:last-child {
+                                max-height: calc(100vh - 8rem);
+                                overflow: hidden;
+                            }
+                        }
+                
+                        /* Reduce font sizes at 1633px */
+                        @media (min-width: 1650px) {
+                            .text-clamp-xs { font-size: clamp(0.625rem, 0.4rem + 0.4vw, 0.7rem); }
+                            .text-clamp-sm { font-size: clamp(0.75rem, 0.5rem + 0.4vw, 0.8rem); }
+                            .text-clamp-base { font-size: clamp(0.875rem, 0.6rem + 0.4vw, 0.9rem); }
+                            .text-clamp-lg { font-size: clamp(1rem, 0.7rem + 0.4vw, 1rem); }
+                            .text-clamp-xl { font-size: clamp(1.125rem, 0.8rem + 0.5vw, 1.3rem); }
+                            .text-clamp-2xl { font-size: clamp(1.25rem, 0.9rem + 0.7vw, 1.6rem); }
+                            .text-clamp-3xl { font-size: clamp(1.5rem, 1rem + 1vw, 2rem); }
+                            .text-clamp-4xl { font-size: clamp(1.875rem, 1.2rem + 1.2vw, 2.5rem); }
+                            .text-clamp-5xl { font-size: clamp(2.25rem, 1.5rem + 1.5vw, 3rem); }
+                            .text-clamp-6xl { font-size: clamp(3rem, 2rem + 2vw, 4rem); }
+                            .text-clamp-hero { font-size: clamp(1rem,  1vw, 2rem); }
+                        }
+                    </style>
+                </head>
+                <body class="font-inter antialiased bg-white dark:bg-black text-[#1a1a1a] dark:text-white transition-colors duration-300 scroll-smooth">
+                    <!-- Preloader -->
+                    <div id="preloader" style="position:fixed;inset:0;z-index:9999;display:flex;justify-content:center;align-items:center;background-color:#fff;" class="dark:!bg-black">
+                        <div style="position:relative;width:256px;height:256px;display:flex;justify-content:center;align-items:center;">
+                
+                            <!-- Circle 1 -->
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCW 3s linear infinite;" viewBox="0 0 200 200">
+                                <defs>
+                                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.3"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="100" cy="100" r="80" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-dasharray="20 200" fill="none" opacity="0.8"/>
+                            </svg>
+                
+                            <!-- Circle 2 -->
+                            <svg style="position:absolute;inset:0;width:100%;height:100%;animation:rotateCCW 4s linear infinite;" viewBox="0 0 200 200">
+                                <defs>
+                                    <linearGradient id="gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#bd9823" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#bd9823" stop-opacity="0.2"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="100" cy="100" r="90" stroke="url(#gradient2)" stroke-width="2" stroke-linecap="round" stroke-dasharray="30 180" fill="none" opacity="0.6"/>
+                            </svg>
+                
+                            <!-- Logo -->
+                            <div style="position:relative;z-index:10;width:150px;height:150px;display:flex;justify-content:center;align-items:center;animation:pulse 2s ease-in-out infinite;">
+                                <img src="./images/logo.webp" 
+                                     alt="Logo" 
+                                     style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 20px rgba(189,152,35,0.3));">
                             </div>
-                            <div>
-                                <p class="text-clamp-base font-bold text-brown-primary dark:text-white mb-1">${testimonial.name}</p>
-                                <p class="text-clamp-sm text-[#666] dark:text-[#999]">${testimonial.title}</p>
-                            </div>
+                
+                            <!-- Glow effect -->
+                            <div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle, #ceb361 0%, transparent 70%);animation:pulseGlow 2s ease-in-out infinite;"></div>
+                
                         </div>
                     </div>
-                `;
-                container.appendChild(card);
-
-                // Dot indicator
-                const dot = document.createElement('button');
-                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-orange-primary w-8' : 'bg-[#e0e0e0] dark:bg-[#333] hover:bg-orange-primary/50'}`;
-                dot.onclick = () => goToSlide(index);
-                dotsContainer.appendChild(dot);
-            });
-
-            updateSlider();
-        }
-
-        function updateSlider() {
-            const container = document.getElementById('testimonialsContainer');
-            if (!container) return;
-            const isMobile = window.innerWidth < 768;
-            const slideWidth = isMobile ? 100 : 33.333;
-            container.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-        }
-
-        function goToSlide(index) {
-            currentSlide = Math.max(0, Math.min(index, testimonialsData.length - 1));
-            renderTestimonials();
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % testimonialsData.length;
-            renderTestimonials();
-        }
-
-        // Auto-slide - Continuous movement
-        let autoSlideInterval;
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(nextSlide, 3000); // Move every 3 seconds
-        }
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        // Initialize on load
-        window.addEventListener('load', () => {
-            const container = document.getElementById('testimonialsContainer');
-            const slider = document.getElementById('testimonialsSlider');
-            
-            // Only initialize if testimonials section exists
-            if (container && slider) {
-                renderTestimonials();
-                startAutoSlide();
                 
-                // Pause on hover (optional - can be removed if you want continuous movement)
-                slider.addEventListener('mouseenter', stopAutoSlide);
-                slider.addEventListener('mouseleave', startAutoSlide);
-            }
-        });
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" class="fixed top-6 left-6 z-50 w-12 h-12 rounded-full bg-white/90 dark:bg-[#1a1a1a]/90 backdrop-blur-sm flex items-center justify-center hover:bg-white dark:hover:bg-[#2a2a2a] hover:scale-110 transition-all duration-300 shadow-lg border border-[#e0e0e0] dark:border-[#333]">
+                        <i class="fas fa-moon text-[#1a1a1a] dark:text-white" id="themeIcon"></i>
+                    </button>
+                
+                    <!-- Top Section: Text Left + Form Right -->
+                    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full top-section-container">
+                        <div class="w-full px-6 lg:px-12 ">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-32 items-start">
+                                <!-- Left: Main Heading and Introduction -->
+                                <div class="space-y-6">
+                                    <h1 class="text-clamp-xl 2xl:text-5xl    font-bold leading-tight text-brown-primary dark:text-white">
+                                        قبل أن توقع، اسأل سؤالاً واحداً:
+                                        <span class="text-orange-primary">هل يمكن عكس هذا القرار بموجب قانون الإمارات؟</span>.
+                                    </h1>
+                                    
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-1 h-16 bg-orange-primary mt-1"></div>
+                                        <p class="text-clamp-base 2xl:text-2xl  text-[#555] dark:text-[#aaa] font-medium leading-relaxed">
+                                            بند واحد خاطئ يمكن أن يوقف كل شيء. مراجعة القرارات للاتفاقيات الحساسة، والشراكات عالية المخاطر، والالتزامات المهمة.
+                                        </p>
+                                    </div>
+                                    
+                                   
+                                    
+                                    <!-- Images -->
+                                    <div class="  top-section-images">
+                                        <div class="rounded-lg h-[200px] sm:h-[250px] lg:h-[300px] 2xl:h-[550px] overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                                            <img src="./images/S4.webp" alt="Office meeting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                        </div>
+                                         
+                                    </div>
+                                    
+                                 
+                                </div>
+                
+                                <!-- Right: Form -->
+                                <div class="space-y-6">
+                                  <div  id="contactForm" class="bg-[#f5f5f5] dark:bg-[#0a0a0a] rounded-xl p-5 lg:p-6 border-2 border-orange-primary/30 dark:border-orange-primary/20 hover:border-orange-primary/50 dark:hover:border-orange-primary/40 hover:shadow-xl transition-all duration-300">
+                                    <h2 class="text-clamp-lg 2xl:text-5xl  font-bold text-[#1a1a1a] dark:text-white mb-3">
+                                        طلب <span class="text-orange-primary">مراجعة سرية</span>
+                                    </h2>
+                                     
+                                    
+                                    <form id="legalForm" class="space-y-3 2xl:space-y-12">
+                                        <div>
+                                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                الاسم <span class="text-orange-primary">*</span>
+                                            </label>
+                                            <input type="text" placeholder="أدخل اسمك الكامل" required class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs 2xl:text-xl  text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                                        </div>
+                
+                                        <div>
+                                            <label class="block text-[9px] 2xl:text-lg  font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                ما نوع القرار القانوني الذي أنت على وشك إتمامه؟ <span class="text-orange-primary">*</span>
+                                            </label>
+                                            <div class="relative">
+                                                <select required class="w-full 2xl:text-lg  px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer">
+                                                    <option value="">اختر نوع القرار</option>
+                                                    <option value="dispute">تأسيس الشركة / إعادة الهيكلة</option>
+                                                    <option value="contract">اتفاقية المساهمين أو الشركاء</option>
+                                                    <option value="partnership">الإقامة الذهبية / مسائل الإقامة</option>
+                                                    <option value="investment">عقد أو التزام عالي القيمة</option>
+                                                    <option value="investment">التعرض التنظيمي أو الامتثال</option>
+                                                    <option value="investment">مسألة قانونية أخرى عالية التأثير</option>
+                                                </select>
+                                                <i class="fas fa-chevron-down absolute left-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
+                                            </div>
+                                        </div>
+                
+                                        <div>
+                                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                تفاصيل القضية <span class="text-[#999] dark:text-[#666] text-[8px] 2xl:text-md">(اختياري)</span>
+                                            </label>
+                                            <textarea placeholder="قدم تفاصيل إضافية حول قضيتك..." rows="2" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] 2xl:text-lg border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666] resize-none"></textarea>
+                                        </div>
+                
+                                        <div>
+                                            <label class="block text-[9px] 2xl:text-lg font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                كيف تفضل أن يتم التواصل معك لهذه المراجعة السرية؟ <span class="text-orange-primary">*</span>
+                                            </label>
+                                            <div class="relative">
+                                                <select id="contactChannel" required class="w-full px-2.5  2xl:text-lg py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary appearance-none cursor-pointer">
+                                                    <option value="">اختر قناة الاتصال</option>
+                                                    <option value="whatsapp">واتساب</option>
+                                                    <option value="phone">مكالمة هاتفية</option>
+                                                    <option value="email">البريد الإلكتروني</option>
+                                                </select>
+                                                <i class="fas fa-chevron-down absolute left-2.5 top-1/2 transform -translate-y-1/2 text-orange-primary pointer-events-none text-[10px]"></i>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Phone Number Field (shown when WhatsApp is selected) -->
+                                        <div id="phoneField" class="hidden">
+                                            <label class="block text-[9px] font-bold 2xl:text-xl text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                رقم الهاتف <span class="text-orange-primary">*</span>
+                                            </label>
+                                            <input type="tel" id="phoneInput" placeholder="+971 XX XXX XXXX" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                                        </div>
 
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            const container = document.getElementById('testimonialsContainer');
-            if (container) {
-                updateSlider();
-            }
-        });
-    </script>
-</body>
-</html>
+                                        <!-- Email Field (shown when Email is selected) -->
+                                        <div id="emailField" class="hidden">
+                                            <label class="block text-[9px] 2xl:text-xl font-bold text-[#666] dark:text-[#aaa] uppercase tracking-wider mb-1">
+                                                عنوان البريد الإلكتروني <span class="text-orange-primary">*</span>
+                                            </label>
+                                            <input type="email" id="emailInput" placeholder="your.email@example.com" class="w-full px-2.5 py-1.5 bg-white dark:bg-[#1a1a1a] border border-[#e0e0e0] dark:border-[#333] rounded-lg text-xs text-[#1a1a1a] dark:text-white focus:outline-none focus:border-orange-primary placeholder:text-[#999] dark:placeholder:text-[#666]">
+                                        </div>
+
+                                        <button type="submit" class="w-full 2l:text-xl py-2 bg-orange-primary text-white rounded-lg font-bold text-xs hover:bg-orange-dark hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-wider">
+                                            طلب استشارة خبير
+                                        </button>
+                                    </form>
+                                  </div>
+                                     <!-- Tags -->
+                                     <div class="flex flex-wrap items-center justify-center gap-3">
+                                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">التوقيع قريب</span>
+                                        </div>
+                                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">قيمة مادية</span>
+                                        </div>
+                                        <div class="bg-orange-primary/10 dark:bg-orange-primary/20 px-4 py-2 rounded hover:bg-orange-primary/20 dark:hover:bg-orange-primary/30 hover:scale-105 hover:shadow-md transition-all duration-300 cursor-pointer">
+                                            <span class="text-orange-primary font-semibold 2xl:text-2xl text-clamp-sm">السمعة في خطر</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                
+                    <!-- Services Section: Three Cards -->
+                    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+                        <div class="w-full px-6 lg:px-12">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <!-- Card 1: Expert Consultation -->
+                                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                                        <img src="./images/S5.webp" alt="Expert Consultation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    </div>
+                                    <div class="p-6">
+                                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">استشارة خبير</h3>
+                                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">وصول مباشر إلى المستشار القانوني الأول</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Document Review -->
+                                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                                        <img src="./images/S7.webp" alt="مراجعة الوثائق" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    </div>
+                                    <div class="p-6">
+                                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">مراجعة الوثائق</h3>
+                                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">تحليل شامل لكل بند</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Strategic Planning -->
+                                <div class="bg-white dark:bg-[#0a0a0a] rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] hover:shadow-xl hover:border-orange-primary hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
+                                    <div class="h-[200px] md:h-[250px] 2xl:h-[400px] overflow-hidden">
+                                        <img src="./images/S6.webp" alt="التخطيط الاستراتيجي" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    </div>
+                                    <div class="p-6">
+                                        <h3 class="text-clamp-xl font-bold text-orange-primary dark:text-orange-primary mb-2 group-hover:text-orange-dark transition-colors duration-300">التخطيط الاستراتيجي</h3>
+                                        <p class="text-clamp-sm text-[#666] dark:text-[#999] group-hover:text-[#333] dark:group-hover:text-[#ccc] transition-colors duration-300">رسم النتائج قبل الالتزام</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                
+                    <!-- Lower Section: Text Left + Image Right -->
+                    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+                        <div class="w-full px-6 lg:px-12">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+                                <!-- Left: Content Text -->
+                                <div class="space-y-8">
+                                    <h2 class="text-clamp-2xl font-bold leading-tight text-brown-primary dark:text-white">
+                                        معظم المشاكل القانونية <span class="text-orange-primary">تبدأ</span> قبل المحكمة — عند اتخاذ القرار.
+                                    </h2>
+                                    
+                                    <p class="text-clamp-base text-[#666] dark:text-[#999] leading-relaxed">
+                                        المشاكل القانونية لا تبدأ في التقاضي. تبدأ عند الالتزام. في اللحظة التي يوضع فيها التوقيع، أو تتشكل فيها الشراكة، أو يتأخر فيها الاستشارة، يتشكل الخطر.
+                                    </p>
+                                    
+                                    <!-- Decision Points Cards -->
+                                    <div class="grid grid-cols-3 gap-4 my-8">
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-pen-fancy text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">توقيع.</p>
+                                        </div>
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-users text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">شراكة.</p>
+                                        </div>
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] text-center hover:border-orange-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-comments text-3xl text-orange-primary mb-2 group-hover:scale-110 transition-transform duration-300"></i>
+                                            <p class="text-clamp-sm font-semibold text-[#1a1a1a] dark:text-white group-hover:text-orange-primary transition-colors duration-300">استشارة.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="text-clamp-xs text-[#999] dark:text-[#666] uppercase tracking-wider mb-4 inline-block px-4 py-2 rounded-lg border-2 border-transparent hover:border-orange-primary transition-all duration-300 cursor-pointer">
+                                        كل نقطة قرار تحمل عواقب محتملة:
+                                    </p>
+                                    
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">نزاعات</span>
+                                        </div>
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">قيود السفر</span>
+                                        </div>
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">تجميد الأصول</span>
+                                        </div>
+                                        <div class="bg-white dark:bg-[#0a0a0a] rounded-lg p-4 border border-[#e0e0e0] dark:border-[#333] flex items-center gap-3 hover:border-orange-primary hover:shadow-md hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-plus text-orange-primary group-hover:rotate-90 transition-transform duration-300"></i>
+                                            <span class="text-clamp-base text-[#1a1a1a] dark:text-white font-medium group-hover:text-orange-primary transition-colors duration-300">تقاضي تجاري</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-[#f5f5f5] dark:bg-[#1a1a1a] rounded-lg p-6 border-r-4 border-orange-primary mt-8 hover:border-orange-dark hover:shadow-lg hover:bg-orange-primary/5 dark:hover:bg-orange-primary/10 transition-all duration-300 cursor-pointer">
+                                        <p class="text-clamp-base text-[#1a1a1a] dark:text-white leading-relaxed">
+                                            "الوقاية أفضل من النزاعات. الوضوح أفضل من التفاؤل. المسؤولية أفضل من التخمين. إذا كان قرارك يحمل وزناً مادياً، فإنه يستحق مراجعة مدروسة قبل أن تلتزم."
+                                        </p>
+                                    </div>
+                                </div>
+                
+                                <!-- Right: Strategic Protection Image + Built for Card -->
+                                <div class="space-y-6">
+                                    <!-- Strategic Protection Card -->
+                                    <div class="relative rounded-xl overflow-hidden border border-[#e0e0e0] dark:border-[#333] group hover:border-orange-primary hover:shadow-xl transition-all duration-300 cursor-pointer">
+                                        <div class="h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[500px] overflow-hidden">
+                                            <img src="./images/S3.webp" alt="Strategic Protection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                                            <div class="flex items-center gap-3 mb-3">
+                                                <div class="w-12 h-12 bg-orange-primary rounded-lg flex items-center justify-center">
+                                                    <i class="fas fa-clock text-white text-xl"></i>
+                                                </div>
+                                                <h3 class="text-clamp-xl font-bold text-white">الحماية الاستراتيجية</h3>
+                                            </div>
+                                            <p class="text-clamp-sm text-white/90">
+                                                تقييم شامل للمخاطر للقرارات عالية المخاطر. نحن نحمي مصالحك قبل أن تتعرض للتهديد.
+                                            </p>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Built for Card -->
+                                    <div class="bg-white dark:bg-[#0a0a0a] rounded-xl p-8 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-lg transition-all duration-300 cursor-pointer">
+                                        <h3 class="text-clamp-sm font-bold text-orange-primary mb-6 uppercase tracking-wider">
+                                            مصمم للقرارات المهمة
+                                        </h3>
+                                        <ul class="space-y-3">
+                                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                                <span>عقود عالية القيمة</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                                <span>هيكلة الشراكة</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                                <span>مراجعة مخاطر ما قبل النزاع</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-clamp-base text-[#333] dark:text-[#ccc]">
+                                                <i class="fas fa-check text-orange-primary mt-1"></i>
+                                                <span>مسائل السمعة</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- VIP Legal Protection Program Section -->
+                    <section class="py-8 lg:py-8 2xl:px-[10%] bg-white dark:bg-black w-full">
+                        <div class="w-full px-6 lg:px-12  ">
+                            <div class="bg-gradient-to-br from-[#1e293b] to-[#0f172a] dark:from-[#0a0a0a] dark:to-[#000] rounded-3xl p-6 lg:p-8 overflow-hidden border border-[#334155] dark:border-[#1a1a1a] shadow-2xl hover:shadow-orange-primary/20 transition-all duration-300">
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                                    <!-- Left Section: Program Details -->
+                                    <div class="space-y-4">
+                                        <!-- Executive Access Tag -->
+                                        <div class="inline-flex items-center gap-2 bg-orange-primary/20 border-2 border-orange-primary rounded-full px-3 py-1.5 hover:bg-orange-primary/30 transition-all duration-300 cursor-pointer group">
+                                            <i class="fas fa-check-circle text-orange-primary text-sm group-hover:scale-110 transition-transform duration-300"></i>
+                                            <span class="text-white text-[9px] uppercase tracking-wider">وصول تنفيذي</span>
+                                        </div>
+
+                                        <!-- Title -->
+                                        <h2 class="text-clamp-xl font-bold text-white leading-tight">
+                                            برنامج الحماية القانونية <span class="text-orange-primary">VIP</span>
+                                        </h2>
+
+                                        <!-- Description -->
+                                        <p class="text-clamp-sm text-white/80 leading-relaxed">
+                                            للمدراء التنفيذيين وصناع القرار الذين يحتاجون إلى أعلى مستوى من الاستشارة القانونية والحماية الاستراتيجية.
+                                        </p>
+                
+                                        <!-- Program Benefits -->
+                                        <div class="space-y-3">
+                                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                                <div class="flex items-start gap-3">
+                                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                                    <div>
+                                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">استجابة أولوية</h3>
+                                                        <p class="text-xs text-white/70">مراجعة مخصصة على مدار 24 ساعة للمسائل العاجلة</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                                <div class="flex items-start gap-3">
+                                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                                    <div>
+                                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">وصول مباشر للمستشار الأول</h3>
+                                                        <p class="text-xs text-white/70">خط مباشر إلى أكثر مستشارينا خبرة</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="bg-[#1e293b]/50 dark:bg-[#0a0a0a]/50 rounded-xl p-4 border border-[#334155] dark:border-[#1a1a1a] hover:border-orange-primary hover:bg-[#1e293b]/70 dark:hover:bg-[#0a0a0a]/70 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                                                <div class="flex items-start gap-3">
+                                                    <div class="w-1.5 h-1.5 bg-orange-primary rounded-full mt-1.5 group-hover:scale-150 transition-transform duration-300"></div>
+                                                    <div>
+                                                        <h3 class="text-clamp-sm font-bold text-white mb-0.5 group-hover:text-orange-primary transition-colors duration-300">رسم شامل للمخاطر</h3>
+                                                        <p class="text-xs text-white/70">تحليل كامل للسيناريو لكل قرار</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                       
+                                    </div>
+                
+                                    <!-- Right Section: Image with Statistics -->
+                                    <div class="relative rounded-2xl overflow-hidden group">
+                                        <div class="h-[400px] lg:h-[450px] overflow-hidden">
+                                            <img src="./images/S8.webp" alt="VIP Protection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                        </div>
+                                        
+                                        <!-- Statistics Overlay -->
+                                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
+                                            <div class="grid grid-cols-3 gap-3">
+                                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">$2B+</div>
+                                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">محمي</p>
+                                                </div>
+                                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                                    <div class="text-clamp-2xl font-bold text-white mb-0.5">50+</div>
+                                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">عملاء VIP</p>
+                                                </div>
+                                                <div class="text-center hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                                    <div class="text-clamp-2xl font-bold text-orange-primary mb-0.5">100%</div>
+                                                    <p class="text-[9px] text-white/80 uppercase tracking-wider">سري</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Footer Disclaimer -->
+                                <div class="text-center mt-6 pt-4 border-t border-[#334155] dark:border-[#1a1a1a]">
+                                    <p class="text-[9px] text-white/50 uppercase tracking-widest">
+                                        بالدعوة أو التأهيل فقط • توفر محدود
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                
+                    <!-- Footer -->
+                    <footer class="py-8 bg-gradient-to-r from-orange-primary/10 via-orange-primary/5 to-orange-primary/10 dark:from-orange-primary/20 dark:via-orange-primary/10 dark:to-orange-primary/20 border-t border-orange-primary/30 dark:border-orange-primary/20 w-full">
+                        <div class="w-full px-6 lg:px-12">
+                            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                                <p class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider">
+                                    © 1998Legal Consultancy FZC LLC
+                                </p>
+                                <div class="flex gap-6">
+                                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">سياسة الخصوصية</a>
+                                    <a href="#" class="text-clamp-xs text-[#1a1a1a] dark:text-white/90 uppercase tracking-wider hover:text-orange-primary hover:underline hover:scale-105 transition-all duration-300 inline-block">شروط الخدمة</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                
+                    <script src="script.js"></script>
+                    <script>
+                        // Theme Toggle - Set before page loads
+                        const html = document.documentElement;
+                        const currentTheme = localStorage.getItem('theme') || 'light';
+                        const preloader = document.getElementById('preloader');
+                        
+                        if (currentTheme === 'dark') {
+                            html.classList.add('dark');
+                            if (preloader) {
+                                preloader.style.backgroundColor = '#000';
+                            }
+                        } else {
+                            html.classList.remove('dark');
+                            if (preloader) {
+                                preloader.style.backgroundColor = '#fff';
+                            }
+                        }
+                
+                        // Preloader
+                        window.addEventListener('load', () => {
+                            setTimeout(() => {
+                                if (preloader) {
+                                    preloader.style.transition = 'opacity 0.6s ease-in-out';
+                                    preloader.style.opacity = '0';
+                                    setTimeout(() => {
+                                        preloader.style.display = 'none';
+                                        
+                                        // Scroll to form on mobile devices
+                                        const isMobile = window.innerWidth < 1024; // lg breakpoint
+                                        if (isMobile) {
+                                            const formElement = document.getElementById('contactForm');
+                                            if (formElement) {
+                                                setTimeout(() => {
+                                                    formElement.scrollIntoView({ 
+                                                        behavior: 'smooth', 
+                                                        block: 'start' 
+                                                    });
+                                                }, 100);
+                                            }
+                                        }
+                                    }, 600);
+                                }
+                            }, 500);
+                        });
+                
+                        // Theme Toggle
+                        const themeToggle = document.getElementById('themeToggle');
+                        const themeIcon = document.getElementById('themeIcon');
+                
+                        if (currentTheme === 'dark') {
+                            themeIcon.className = 'fas fa-sun text-white';
+                        } else {
+                            themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
+                        }
+                
+                        themeToggle.addEventListener('click', () => {
+                            html.classList.toggle('dark');
+                            const isDark = html.classList.contains('dark');
+                            
+                            if (isDark) {
+                                themeIcon.className = 'fas fa-sun text-white';
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                themeIcon.className = 'fas fa-moon text-[#1a1a1a]';
+                                localStorage.setItem('theme', 'light');
+                            }
+                        });
+                
+                        // Contact Channel Toggle
+                        const contactChannel = document.getElementById('contactChannel');
+                        const phoneField = document.getElementById('phoneField');
+                        const emailField = document.getElementById('emailField');
+                        const phoneInput = document.getElementById('phoneInput');
+                        const emailInput = document.getElementById('emailInput');
+                
+                        contactChannel.addEventListener('change', function() {
+                            const selectedValue = this.value;
+                            
+                            // Hide both fields first
+                            phoneField.classList.add('hidden');
+                            emailField.classList.add('hidden');
+                            phoneInput.removeAttribute('required');
+                            emailInput.removeAttribute('required');
+                            phoneInput.value = '';
+                            emailInput.value = '';
+                            
+                            // Show appropriate field based on selection
+                            if (selectedValue === 'whatsapp' || selectedValue === 'phone') {
+                                phoneField.classList.remove('hidden');
+                                phoneInput.setAttribute('required', 'required');
+                            } else if (selectedValue === 'email') {
+                                emailField.classList.remove('hidden');
+                                emailInput.setAttribute('required', 'required');
+                            }
+                        });
+                
+                        // Phone Number Validation - Only allow numbers, +, spaces, and dashes
+                        phoneInput.addEventListener('input', function(e) {
+                            // Remove any character that is not a number, +, space, or dash
+                            this.value = this.value.replace(/[^0-9+\s-]/g, '');
+                        });
+                
+                        phoneInput.addEventListener('keypress', function(e) {
+                            // Prevent typing non-numeric characters (except +, space, dash, and backspace)
+                            const char = String.fromCharCode(e.which);
+                            if (!/[0-9+\s-]/.test(char) && !e.ctrlKey && !e.metaKey) {
+                                e.preventDefault();
+                            }
+                        });
+                
+                        // Email Validation - Real-time format validation
+                        emailInput.addEventListener('input', function(e) {
+                            const email = this.value;
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            
+                            // Remove validation styling if empty
+                            if (email === '') {
+                                this.classList.remove('border-red-500', 'border-green-500');
+                                this.classList.add('border-[#e0e0e0]', 'dark:border-[#333]');
+                                return;
+                            }
+                            
+                            // Validate email format
+                            if (emailRegex.test(email)) {
+                                this.classList.remove('border-red-500', 'border-[#e0e0e0]', 'dark:border-[#333]');
+                                this.classList.add('border-green-500');
+                            } else {
+                                this.classList.remove('border-green-500', 'border-[#e0e0e0]', 'dark:border-[#333]');
+                                this.classList.add('border-red-500');
+                            }
+                        });
+                
+                        emailInput.addEventListener('blur', function(e) {
+                            const email = this.value;
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            
+                            if (email && !emailRegex.test(email)) {
+                                this.setCustomValidity('يرجى إدخال عنوان بريد إلكتروني صحيح');
+                            } else {
+                                this.setCustomValidity('');
+                            }
+                        });
+                
+                        // Form submission
+                        document.getElementById('legalForm').addEventListener('submit', async function(e) {
+                            e.preventDefault();
+                            
+                            const btn = this.querySelector('button[type="submit"]');
+                            const originalText = btn.textContent;
+                            const originalBg = btn.style.background;
+                            
+                            // Disable button and show processing state
+                            btn.disabled = true;
+                            btn.textContent = 'جاري المعالجة...';
+                            btn.style.background = '#48bb78';
+                            
+                            // Collect form data
+                            const contactChannelValue = document.getElementById('contactChannel').value;
+                            const phoneVal = document.getElementById('phoneInput')?.value || '';
+                            const formData = {
+                                name: this.querySelector('input[type="text"]').value,
+                                decisionType: this.querySelector('select').value,
+                                caseDetails: this.querySelector('textarea').value || '',
+                                contactChannel: contactChannelValue,
+                                phoneNumber: phoneVal,
+                                // send WhatsApp number specifically in `whatsupnumber` when WhatsApp selected
+                                whatsupnumber: contactChannelValue === 'whatsapp' ? phoneVal : '',
+                                email: document.getElementById('emailInput')?.value || '',
+                                // Add language field
+                                language: 'arabic'
+                            };
+                            
+                            try {
+                                // Log request details
+                                console.log('📤 إرسال البيانات:', {
+                                    url: 'https://shazmlc.cloud/webhook/website-form',
+                                    method: 'POST',
+                                    data: formData,
+                                    timestamp: new Date().toLocaleString('ar-EG')
+                                });
+                                
+                                // Send data to webhook
+                                const response = await fetch('https://shazmlc.cloud/webhook/website-form', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(formData)
+                                });
+                                
+                                // Log response details
+                                console.log('📥 استجابة الخادم:', {
+                                    status: response.status,
+                                    statusText: response.statusText,
+                                    ok: response.ok,
+                                    headers: Object.fromEntries(response.headers.entries()),
+                                    timestamp: new Date().toLocaleString('ar-EG')
+                                });
+                                
+                                // Try to get response body
+                                let responseData = null;
+                                try {
+                                    const contentType = response.headers.get('content-type');
+                                    if (contentType && contentType.includes('application/json')) {
+                                        responseData = await response.json();
+                                        console.log('📋 بيانات الاستجابة:', responseData);
+                                    } else {
+                                        const textData = await response.text();
+                                        console.log('📋 نص الاستجابة:', textData);
+                                        responseData = textData;
+                                    }
+                                } catch (parseError) {
+                                    console.warn('⚠️ تعذر تحليل الاستجابة:', parseError);
+                                }
+                                
+                                if (response.ok) {
+                                    // Success
+                                    console.log('✅ تم الإرسال بنجاح!', {
+                                        status: response.status,
+                                        data: responseData
+                                    });
+                                    btn.textContent = '✓ تم الإرسال بنجاح';
+                                    btn.style.background = '#28a745';
+                                    
+                                    // Twitter conversion tracking event
+                                    twq('event', 'Lead');
+                                    
+                                    // Redirect to thank you page after 1 second
+                                    setTimeout(() => {
+                                        window.location.href = 'thankyou.html';
+                                    }, 1000);
+                                } else {
+                                    // Error response
+                                    console.error('❌ فشل الإرسال:', {
+                                        status: response.status,
+                                        statusText: response.statusText,
+                                        response: responseData
+                                    });
+                                    throw new Error(`فشل الإرسال: ${response.status} ${response.statusText}`);
+                                }
+                            } catch (error) {
+                                // Handle error
+                                console.error('❌ خطأ في إرسال النموذج:', {
+                                    error: error.message,
+                                    stack: error.stack,
+                                    timestamp: new Date().toLocaleString('ar-EG')
+                                });
+                                btn.textContent = '✗ خطأ - حاول مرة أخرى';
+                                btn.style.background = '#dc3545';
+                                
+                                setTimeout(() => {
+                                    btn.textContent = originalText;
+                                    btn.style.background = originalBg;
+                                    btn.disabled = false;
+                                }, 3000);
+                            }
+                        });
+                
+                        // Testimonials Slider
+                        const testimonialsData = [
+                            {
+                                quote: "The level of detail and foresight in their review saved us from a potentially catastrophic partnership agreement. They identified clauses that would have cost us millions.",
+                                name: "Ahmed Al-Mansouri",
+                                title: "CEO, Emirates Tech Holdings",
+                                initials: "AM"
+                            },
+                            {
+                                quote: "Their scenario planning approach is unmatched. They mapped out every possible outcome before we signed, giving us the confidence to proceed with clarity.",
+                                name: "Sarah Johnson",
+                                title: "General Counsel, Global Ventures",
+                                initials: "SJ"
+                            },
+                            {
+                                quote: "Professional, thorough, and strategic. They don't just review documents—they protect your interests with precision and expertise.",
+                                name: "Mohammed Al-Hashimi",
+                                title: "Managing Partner, Horizon Capital",
+                                initials: "MH"
+                            }
+                        ];
+                
+                        let currentSlide = 0;
+                
+                        function renderTestimonials() {
+                            const container = document.getElementById('testimonialsContainer');
+                            const dotsContainer = document.getElementById('dotsContainer');
+                            
+                            // Check if elements exist before manipulating them
+                            if (!container || !dotsContainer) {
+                                return;
+                            }
+                            
+                            container.innerHTML = '';
+                            dotsContainer.innerHTML = '';
+                            
+                            testimonialsData.forEach((testimonial, index) => {
+                                // Testimonial card
+                                const card = document.createElement('div');
+                                card.className = 'min-w-full md:min-w-[calc(33.333%-1rem)] px-4';
+                                card.innerHTML = `
+                                    <div class="bg-white dark:bg-[#0a0a0a] rounded-2xl p-10 border border-[#e0e0e0] dark:border-[#333] hover:border-orange-primary hover:shadow-2xl transition-all duration-300 h-full group">
+                                        <div class="flex gap-1 mb-6">
+                                            ${Array(5).fill(0).map(() => '<i class="fas fa-star text-orange-primary text-lg"></i>').join('')}
+                                        </div>
+                                        <p class="text-clamp-lg text-[#333] dark:text-[#ccc] mb-8 leading-relaxed italic min-h-[120px]">
+                                            "${testimonial.quote}"
+                                        </p>
+                                        <div class="flex items-center gap-4 pt-4 border-t border-[#e0e0e0] dark:border-[#333]">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-orange-primary/20 to-orange-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                                <span class="text-orange-primary font-bold text-clamp-base">${testimonial.initials}</span>
+                                            </div>
+                                            <div>
+                                                <p class="text-clamp-base font-bold text-brown-primary dark:text-white mb-1">${testimonial.name}</p>
+                                                <p class="text-clamp-sm text-[#666] dark:text-[#999]">${testimonial.title}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                container.appendChild(card);
+                
+                                // Dot indicator
+                                const dot = document.createElement('button');
+                                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-orange-primary w-8' : 'bg-[#e0e0e0] dark:bg-[#333] hover:bg-orange-primary/50'}`;
+                                dot.onclick = () => goToSlide(index);
+                                dotsContainer.appendChild(dot);
+                            });
+                
+                            updateSlider();
+                        }
+                
+                        function updateSlider() {
+                            const container = document.getElementById('testimonialsContainer');
+                            if (!container) return;
+                            const isMobile = window.innerWidth < 768;
+                            const slideWidth = isMobile ? 100 : 33.333;
+                            container.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+                        }
+                
+                        function goToSlide(index) {
+                            currentSlide = Math.max(0, Math.min(index, testimonialsData.length - 1));
+                            renderTestimonials();
+                        }
+                
+                        function nextSlide() {
+                            currentSlide = (currentSlide + 1) % testimonialsData.length;
+                            renderTestimonials();
+                        }
+                
+                        // Auto-slide - Continuous movement
+                        let autoSlideInterval;
+                        function startAutoSlide() {
+                            autoSlideInterval = setInterval(nextSlide, 3000); // Move every 3 seconds
+                        }
+                        function stopAutoSlide() {
+                            clearInterval(autoSlideInterval);
+                        }
+                
+                        // Initialize on load
+                        window.addEventListener('load', () => {
+                            const container = document.getElementById('testimonialsContainer');
+                            const slider = document.getElementById('testimonialsSlider');
+                            
+                            // Only initialize if testimonials section exists
+                            if (container && slider) {
+                                renderTestimonials();
+                                startAutoSlide();
+                                
+                                // Pause on hover (optional - can be removed if you want continuous movement)
+                                slider.addEventListener('mouseenter', stopAutoSlide);
+                                slider.addEventListener('mouseleave', startAutoSlide);
+                            }
+                        });
+                
+                        // Handle window resize
+                        window.addEventListener('resize', () => {
+                            const container = document.getElementById('testimonialsContainer');
+                            if (container) {
+                                updateSlider();
+                            }
+                        });
+                    </script>
+                </body>
+                </html>
+                
